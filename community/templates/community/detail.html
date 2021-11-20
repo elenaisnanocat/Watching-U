@@ -5,7 +5,8 @@
   <a href="{% url 'community:index' %}">[back]</a>
   <a href="{% url 'community:update' review.pk %}">[update]</a>
   <h1>{{ review.title }}</h1>
-  <p>{{ review.movie.title }}</p>
+  <a href="{% url 'accounts:profile' review.user %}">{{ review.user }}</a>
+  <p><a href="{% url 'movies:detail' review.movie.pk %}">{{ review.movie.title }}</a></p>
   <p>{{ review.rank }}점 / 10점</p>
   <hr>
   <p>{{ review.content }}</p>

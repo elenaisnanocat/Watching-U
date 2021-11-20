@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>recommend</h1>
+
+{{ user.review_set.all|length }}
+{% if user.review_set.all|length != 0 %}
+  {% comment %} {% for genre in genres %}
+    <p>{{ genre }}</p>
+  {% endfor %} {% endcomment %}
+  {{ genres }}
+
+{% endif %}
+
+{% endblock  %}

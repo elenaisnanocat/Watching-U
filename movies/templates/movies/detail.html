@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load humanize %}
 
 <img src="{{ movie.backdrop_path }}" alt="" width="600px" height="500px">
+<img id="wordCloud" src="/static/{{movie.title}}.png" alt="">
 <br>
 {{ movie.title }}
+
+{% if comments_cnt != 0 %}
+    <div >average | {{ average }}</div>
+{% endif %}
+
 <br>
 {% for genre in movie.genres.all %}
 {{ genre.name }}
@@ -28,6 +35,16 @@
 </form>
 
 <a href="{% url 'community:create' movie.pk %}">리뷰 작성</a>
+
+<div>
+{% for review in movie.review_set.all %}
+  <a href="{% url 'community:detail' review.pk %}">
+    <p>별 {{ review.rank }} / 5개</p>
+    <p>{{ review.user }} - {{ review.content }}</p>
+    {{ review.updated_at|naturaltime }}
+  </a>
+{% endfor %}
+</div>
 
 <div>
   <iframe class="video-trailer" src="" frameborder="0"></iframe>

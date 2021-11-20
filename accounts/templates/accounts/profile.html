@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% comment %} 페이지 구성은 기능 구현한 후에.. {% endcomment %}
 
 <h1>{{ person.username }}</h1>
+
+<img src={% if person.profile.image %}"{{ person.profile.image.url }}"{% endif %}"https://i.stack.imgur.com/34AD2.jpg" alt="">
+
+{% if user == person %}
+<a href="{% url 'accounts:update' %}">회원정보 수정</a>
+{% endif %}
+
+<p>{{ person.username }}님의 총 영화 감상시간은 {{ user_runtime }}시간</p>
+
 <a href="{% url 'movies:home' %}">Home</a>
 <hr>
 팔로잉 : <span id="followings">{{ person.followings.all|length }}</span>  팔로워 : <span id="followers">{{ person.followers.all|length }}</span>
@@ -19,12 +27,13 @@
 {% endif %}
 
 <hr>
-<h2>{{person.username}} 님이 작성한 후기 목록</h2>
+<h2>{{person.username}} 님이 평가한 영화 목록</h2>
 <ul>
-  {% for movie in person.movie_set.all %}
-  <li>
-    <a href="{% url 'movies:detail' movies.pk %}">{{ movies.title }}</a>
-  </li>
+  {% for review in person.review_set.all %}
+    <a href="{% url 'community:detail' review.pk %}">
+    <img src="{{ review.movie.poster_path }}" alt="" width="300px" height="400px">
+    {{ review.movie.title }}
+    </a>
   {% empty %}
   <li>글이 아직 없어요.</li>
   {% endfor %}
@@ -43,14 +52,19 @@
 
 <h2>보고싶어요 한 영화 목록</h2>
 <ul>
-  {% for like_movie in person.like_movies.all %}
-    <li>
-      <a href="{% url 'movies:detail' like_movie.pk %}">{{ like_movie.title }}</a>
-    </li>
+  {% for want_movie in person.want_movies.all %}
+    <a href="{% url 'movies:detail' want_movie.pk %}">
+    <img src="{{ want_movie.poster_path }}" alt="" width="300px" height="400px">
+    {{ want_movie.title }}
+    </a>
   {% empty %}
     <li>보고싶어요 한 영화가 아직 없어요.</li>
   {% endfor %}
 </ul>
+
+<div style="width: 900px; height:900px;">
+    <canvas id="rankChart"></canvas>
+</div>
 
 {% endblock content %}
 
@@ -90,5 +104,27 @@ form.addEventListener('submit', (event) => {
   })
 
 })
+
+
+// chart
+const ctx = document.getElementById('rankChart').getContext('2d');
+console.log(data)
+  const rankChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: ['d','d','d','d','d'],
+          datasets: [{
+              label: '# of Votes',
+              data: [1,2,3,4,5],
+              borderColor: [
+                  'rgb(75, 192, 192)',
+              ],
+              fill: true,
+              lineTension: 0.5
+          }]
+      },
+  });
+
+
 </script>
 {% endblock script %}
