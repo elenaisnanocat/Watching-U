@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<img src="{{ movie.backdrop_path }}" alt="" width="600px" height="500px">
+<br>
+{{ movie.title }}
+<br>
+{% for genre in movie.genres.all %}
+{{ genre.name }}
+{% endfor %}
+<br>
+{{ movie.overview }}
+<br>
+{{ movie.actors }}
+<br>
+{{ movie.runtime }}분
+<br>
+{{ movie.release_date }}
+<br>
+
+<form class="want-form" action="{% url 'movies:want' movie.pk %}">
+  {% csrf_token %}
+  {% if user in movie.want_users.all %}
+    <button id="btn">보고싶어요 취소</button>
+  {% else %}
+    <button id="btn">보고싶어요</button>
+  {% endif %}
+</form>
+
+<a href="{% url 'community:create' movie.pk %}">리뷰 작성</a>
+
+<div>
+  <iframe class="video-trailer" src="" frameborder="0"></iframe>
+</div>
+
+{% endblock  %}
+
+
+
+
+{% block script %}
+<script>
+// 보고싶어요
+const form = document.querySelector('.want-form')
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault()
+  axios({
+    method: 'POST',
+    url: form.action,
+    headers: {
+      'X-CSRFToken': csrftoken
+    }
+  })
+  .then(res => {
+    const btn = document.querySelector('#btn')
+    const txt = document.querySelector('#txt')
+    if (res.data.is_want) {
+      btn.innerText = '보고싶어요 취소'
+    } else {
+      btn.innerText = '보고싶어요'
+    }
+     txt.innerText = res.data.cnt_want
+   })
+  .catch(err => {
+    console.log(err)
+    if (err.response.status === 401) {
+      document.location.href = '/accounts/login'
+    }
+  })
+})
+
+
+// youtube api 
+const iframe = document.querySelector('.video-trailer')
+const query = "{{ movie.title }}" + " movie trailer"
+// console.log(query)
+const API_KEY = 'AIzaSyCer-i6W_BIpmteNaMCjg_h38sXtoT4hXk'
+const API_URL = 'https://www.googleapis.com/youtube/v3/search'
+
+const params = {
+  key: API_KEY,
+  part: 'snippet',
+  type: 'video',
+  q: query,
+}
+
+axios({
+  url: API_URL,
+  method: 'get',
+  params,
+})
+.then(res => {
+  const videoURI = res.data.items[0].id.videoId
+  iframe.src = 'https://www.youtube.com/embed/' + videoURI
+})
+
+
+</script>
+{% endblock  %}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% comment %} 페이지 구성은 기능 구현한 후에.. {% endcomment %}
+
+<h1>{{ person.username }}</h1>
+<a href="{% url 'movies:home' %}">Home</a>
+<hr>
+팔로잉 : <span id="followings">{{ person.followings.all|length }}</span>  팔로워 : <span id="followers">{{ person.followers.all|length }}</span>
+{% if user != person %}
+  <form id="follow-form" action="{% url 'accounts:follow' person.pk %}" method="POST">
+    {% csrf_token %}
+    {% if user in person.followers.all %}
+      <button>팔로우 취소</button>
+    {% else %}
+      <button>팔로우</button>
+    {% endif %}
+  </form>
+{% endif %}
+
+<hr>
+<h2>{{person.username}} 님이 작성한 후기 목록</h2>
+<ul>
+  {% for movie in person.movie_set.all %}
+  <li>
+    <a href="{% url 'movies:detail' movies.pk %}">{{ movies.title }}</a>
+  </li>
+  {% empty %}
+  <li>글이 아직 없어요.</li>
+  {% endfor %}
+</ul>
+<hr>
+
+<h2>댓글 목록</h2>
+<ul>
+  {% for comment in person.comment_set.all %}
+    <li>{{ comment.content }}</li>
+  {% empty %}
+    <li>댓글이 아직 없어요.</li>
+  {% endfor %}
+</ul>
+<hr>
+
+<h2>보고싶어요 한 영화 목록</h2>
+<ul>
+  {% for like_movie in person.like_movies.all %}
+    <li>
+      <a href="{% url 'movies:detail' like_movie.pk %}">{{ like_movie.title }}</a>
+    </li>
+  {% empty %}
+    <li>보고싶어요 한 영화가 아직 없어요.</li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}
+
+
+{% block script %}
+<script>
+
+const form = document.querySelector('#follow-form')
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault()
+  axios({
+    method: 'POST',
+    url: form.action,
+    headers: {
+      'X-CSRFToken': csrftoken
+    }
+  })
+  .then(res => {
+    const btn = form.querySelector('button')
+    if (res.data.is_follow) {
+      btn.innerText = '팔로우 취소'
+    } else {
+      btn.innerText = '팔로우'
+    }
+
+    const followers = document.querySelector('#followers')
+    const followings = document.querySelector('#followings')
+
+    followers.innerText = res.data.cnt_follower
+    followings.innerText = res.data.cnt_following
+
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
+})
+</script>
+{% endblock script %}
