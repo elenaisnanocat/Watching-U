@@ -1,0 +1,39 @@
+:root {
+  --menu-width: 37.5em; /* Width of menu */
+  --items: 4; /* Number of items you have */
+  --item-width: calc(var(--menu-width) / var(--items));
+}
+
+.body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(45deg, #b317fc, #ff32b7);
+  font-family: "Roboto", sans-serif;
+  height: 15vh;
+  overflow: hidden;
+  width: 100vw;
+}
+
+
+#info-box {
+  position: relative;
+}
+
+#info-box ul {
+  list-style: none;
+}
+#info-box a {
+  color: white;
+  text-decoration: none;
+  text-align: right;
+  padding: 0.5em 0;
+  transition: all 0.1s ease-out;
+  display: block;
+  text-transform: uppercase;
+  font-size: 1.25em;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+#info-box a:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
