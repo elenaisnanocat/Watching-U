@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.db.models.deletion import CASCADE
 from movies.models import Movie
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class Review(models.Model):
@@ -12,7 +13,7 @@ class Review(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    rank = models.IntegerField()
+    rank = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
 
     def __str__(self):
         return self.title
