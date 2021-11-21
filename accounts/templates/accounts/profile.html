@@ -3,7 +3,7 @@
 
 
 
-
+<br><br>
 <div class="row">
 <div class="col-md-12 text-center">
   <img style="border-radius: 50%" src={% if person.profile.image %}"{{ person.profile.image.url }}"{% endif %}"https://i.stack.imgur.com/34AD2.jpg" width=250 height=250>
@@ -30,7 +30,7 @@
 
 
 
-<div class="text-center">
+<div class="text-center bg-dark bg-gradient text-white">
   <hr>
   reviews {{ person.review_set.all|length }} | 
   followings <span id="followings">{{ person.followings.all|length }}</span> | 
@@ -80,7 +80,7 @@
 
 
 <div>
-<p class="lead text-center fw-bold">{{ person.username }}님이 보고싶은 영화</p>
+<p class="lead text-center fw-bold bg-dark bg-gradient text-white">{{ person.username }}님이 보고싶은 영화</p>
 {% for movie in person.want_movies.all %}
   <a href="{% url 'movies:detail' movie.pk %}"><img src="{{ movie.poster_path }}" width="200px" height="300px"></a>
 {% endfor %}

@@ -18,9 +18,9 @@
 
 /* Gradient 6 */
 #g6 {
-  background: linear-gradient(90deg, #aea4e3, #f8baf0);
+  background: linear-gradient(90deg, #9c94c5, #4b4b4b);
 }
-
+/* #aea4e3, #f8baf0 #ad66dd*/
 </style>
 
 
@@ -187,8 +187,9 @@ axios({
   const videoURI = res.data.items[0].id.videoId
   iframe.src = 'https://www.youtube.com/embed/' + videoURI
 })
-
   </script>
+
+  {% include 'footer.html' %}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>

@@ -46,7 +46,7 @@ body {
 }
 
 .nav div.logo a:hover {
-	color: #00e676;
+	color: #a226f5;
 }
 
 .nav div.main_list {
@@ -78,7 +78,7 @@ body {
 }
 
 .nav div.main_list ul li a:hover {
-	color: #00e676;
+	color: #a226f5;
 }
 
 /* Home section */
@@ -86,7 +86,7 @@ body {
 .home {
 	width: 100%;
 	height: 8.5vh;
-	background-image: url(https://images.unsplash.com/photo-1498550744921-75f79806b8a7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b0f6908fa5e81286213c7211276e6b3d&auto=format&fit=crop&w=1500&q=80);
+	background-image: url(https://img.freepik.com/free-photo/man-standing-near-a-film-projector-in-the-room-projectionist_132310-275.jpg?size=626&ext=jpg);
 	{% comment %} background: none; {% endcomment %}
   background-position: center top;
 	background-size: cover;
@@ -364,39 +364,18 @@ body {
 		<div id="mainListDiv" class="main_list">
 			<ul class="navlinks">
 				<li><a href="{% url 'community:index' %}">Community</a></li>
-				<li><a href="{% url 'community:index' %}">Map</a></li>
-				<li><a href="{% url 'community:index' %}">Ramdom</a></li>
-
-        {% comment %} 로그인 했을때 보이는 드롭다운 기능은 되는데 모양이 안예뻐서 나중에 드롭다운을 바꿔야할듯 {% endcomment %}
-         {% if user.is_authenticated %}
-				<li class="nav-item dropdown ">
-          <a class="nav-link dropdown-toggle " href="{% url 'accounts:profile' user.username %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              {{ user.username }}
-            </a>
-            <ul class="dropdown-menu bg-transparent" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item bg-transparent" href="{% url 'accounts:profile' user.username %}">profile</a></li>
-              <li><a class="dropdown-item bg-transparent" href="{% url 'accounts:update' %}">update</a></li>
-              <form class="dropdown-item bg-transparent" action="{% url 'accounts:logout' %}" method="post">
+				<li><a href="{% url 'movies:recommend' %}">Recommend</a></li>
+				{% if user.is_authenticated %}
+				<li><a href="{% url 'accounts:profile' user.username %}">{{ user.username }}</a></li>
+				<li><a href="{% url 'accounts:update' %}">Update</a></li>
+				<form action="{% url 'accounts:logout' %}" method="post">
                 {% csrf_token %}
-                <button >logout</button></form> 
-                {% comment %} 이건 찾아보고 버튼 티안나는 모양으로 바꿔야할듯 {% endcomment %}
-              <li><a class="dropdown-item bg-transparent" href="#">Contact Us</a></li>
-            </ul>
-          </li> 
-        {% comment %} 로그인 안됐을때 보이는 드롭다운 {% endcomment %}
-        {% else %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Accounts
-            </a>
-            <ul class="dropdown-menu bg-transparent" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item bg-transparent" href="{% url 'accounts:signup' %}">회원가입</a></li>
-              <li><a class="dropdown-item bg-transparent" href="{% url 'accounts:login' %}">로그인</a></li>
-              <li><a class="dropdown-item bg-transparent" href="#">Contact Us</a></li>
-            </ul>
-          </li>
-        {% endif %} 
-
+                <button class="btn btn-link text-white text-decoration-none p-0 ">Logout</button></form>
+				{% else %}
+				<li><a href="{% url 'accounts:signup' %}">Signup</a></li>
+        <li><a href="{% url 'accounts:login' %}">Login</a></li>
+				{% endif %} 
+        {% comment %} 로그인 했을때 보이는 드롭다운 기능은 되는데 모양이 안예뻐서 나중에 드롭다운을 바꿔야할듯 {% endcomment %}
 			</ul>
 		</div>
 		<span class="navTrigger">

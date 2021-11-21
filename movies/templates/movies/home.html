@@ -8,17 +8,11 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/greyfooter.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/bluepurple.css' %}">
   <title>Document</title>
-  {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}">
-  <script src="https://code.jquery.com/jquery-3.4.1.js"   
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="   
-	crossorigin="anonymous"></script> {% endcomment %}
-  {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}"> {% endcomment %}
   <style>
 
   {% comment %} 캐러셀 탑10 {% endcomment %}
   :root {
   --crsl-bg: transparent;
-  {% comment %} --box-bg: #1e272e; 박스 색깔{% endcomment %}
   --box-shadow: #0000001c;
   --box-shadow-border: #0000000f;
   --box-border: transparent;
@@ -29,11 +23,6 @@ html, body {
   margin: 0;
   width: 100%;
   height: 100%;
-  {% comment %} background: #2f3539; {% endcomment %}
-  {% comment %} background: -moz-radial-gradient(circle, #2f3539 0%, #1e272e 100%); {% endcomment %}
-  {% comment %} background: -webkit-radial-gradient(circle, #2f3539 0%, #1e272e 100%); {% endcomment %}
-  {% comment %} background: radial-gradient(circle, #2f3539 0%, #2f3539 100%);  {% endcomment %}
-  {% comment %} 배경 색깔 {% endcomment %}
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2f3539",endColorstr="#1e272e",GradientType=1);
 }
 html *, body * {
@@ -163,7 +152,7 @@ crossorigin="anonymous"></script>
 
 
 
-<body>
+<body class="bg-light bg-gradient">
 
 {% comment %} 네브바 html이랑 연결 {% endcomment %}
   {% include 'nav.html' %}
@@ -201,19 +190,19 @@ crossorigin="anonymous"></script>
 
 
 <!-- Site footer 나중에 링크랑 다 바꿔야함-->
-<div class="site-footer">
+<div class="site-footer ">
   <div class="container">
     <div class="row">
-      <div class="col-sm-12 col-md-6">
+      <div class="col-sm-12 col-md-6 offset-1">
       
         <h1>sadd</h1>
-        <img src="https://cdn.pixabay.com/photo/2021/06/16/20/22/cat-6342145_960_720.jpg" alt="" width="550px" height="500px" no-repeat center;>
+        <img src="https://img.freepik.com/free-photo/man-standing-near-a-film-projector-in-the-room-projectionist_132310-275.jpg?size=626&ext=jpg" alt="" width="650px" height="500px" no-repeat center;>
       </div>
-      <div class="col-xs-6 col-md-3">
+      <div class="col-xs-6 col-md-3 offset-1">
         <h1>asda</h1> 
-        <h2>이 사이트는 어쩌고 저쩌고해서 만들어 졌고 어쩌고 저쩌고 영화 추천사이트입니다</h2>
+        <h6>이 사이트는 어쩌고 저쩌고해서 만들어 졌고 어쩌고 저쩌고 영화 추천사이트입니다</h6>
         <br>
-        <h3>응 인조이 유어셀프</h3>
+        <h5>응 인조이 유어셀프</h5>
       </div>
     </div>
     <hr>
@@ -221,28 +210,28 @@ crossorigin="anonymous"></script>
 </div>
 {% comment %} 검은바탕 {% endcomment %}
 
-
-
-<h1>asdasdas</h1>
-
-
-
-
-
-<br><br><br>
-<footer class="body">
+<div class="site-footer bg-light bg-gradient">
   <div class="container">
-    
-
-<div id="info-box">
-  <ul>
-    <li><a target="_top" href="https://twitter.com/thisisfjolt">Follow on Twitter</a></li>
-    <li><a target="_top" href="https://fjolt.com/article/css-only-stripe-menu-with-clip">Read Article</a></li>
-    <li><a target="_top" href="https://github.com/smpnjn/stripe-like-menu">GitHub Repo</a></li>
-  </ul>
-</div>
+    <div class="row">
+      <div class="col-xs-6 col-md-3 offset-1">
+      
+        <h1>sadd</h1>
+        <h5>이 사이트는 어쩌고 저쩌고해서 만들어 졌고 어쩌고 저쩌고 영화 추천사이트입니다</h5>
+        <h5>응 인조이 유어셀프</h5>
+      </div>
+      <div class="col-sm-12 col-md-6 offset-1">
+        <h1>asda</h1> 
+        <img src="https://mblogthumb-phinf.pstatic.net/MjAxOTA1MjJfMjgw/MDAxNTU4NDg5NjUyMTk4.MUyw0noH6aXu3xDU8qTTBDMobMSC_iHNkDhlz3lLE3sg.3UW_HU94cv5_TcvA4bsmLroH3aXDMm-8RK1EN_dBirIg.JPEG.pccekorea/charles_chaplin_in_modern_times.jpg?type=w800" alt="" width="650px" height="500px" no-repeat center;>
+        <br>
+      </div>
+    </div>
+    <hr>
   </div>
-</footer>
+</div>
+
+  {% include 'footer.html' %}
+
+
 
 
 

@@ -186,7 +186,7 @@ div.card {
 </head>
 
 
-<body>
+<body class="bg-light bg-gradient">
   {% include 'nav.html' %}
 
   
@@ -200,14 +200,14 @@ div.card {
       <img id="poster" class="card__image" src="{{ review.movie.poster_path }}" alt="" width="300px" height="400px">
 <img id="wordCloud" src="/static/{{review.movie.title}}.png" alt="" width="300px" height="400px">
     </div>
-    <div class="card-title d-flex justify-content-center">
+    <div class="card-title d-flex justify-content-center mb-0">
       <h5>
         {{ review.title }}
       </h5>
     </div>
     <div class="card-flap flap1 ">
       <div class="card-description ">
-        <p class="d-flex justify-content-center">
+        <p class="d-flex justify-content-center m-0">
 
         
           {{ review.rank }}점 / 5점</p>
@@ -218,16 +218,16 @@ div.card {
           <form class="like-form" data-pk="{{ review.pk }}">
             {% csrf_token %}
             {% if user in review.like_users.all %}
-              <button class="btn btn-link px-0"><i id="btn-{{ review.pk }}" class="fas fa-thumbs-up fa-lg" style="color:#FF5252;"></i></button>
+              <button class="btn btn-link p-0"><i id="btn-{{ review.pk }}" class="fas fa-thumbs-up fa-lg" style="color:#a226f5;"></i></button>
             {% else %}
-              <button class="btn btn-link px-0"><i  id="btn-{{ review.pk }}" class="fas fa-thumbs-up fa-lg" style="color:black;"></i></button>
+              <button class="btn btn-link p-0"><i  id="btn-{{ review.pk }}" class="fas fa-thumbs-up fa-lg" style="color:black;"></i></button>
             {% endif %}
           </form>
           <p><span id="txt-{{ review.pk }}">{{ review.like_users.all|length }}</span> 명이 이 글을 좋아합니다.</p>
         </div>
       </div>
       <div class="card-actions d-flex justify-content-center">
-        <a href="{% url 'community:detail' review.pk %}" class="btn">Read more</a>
+        <a class="bg-dark bg-gradient text-white text-decoration-none rounded-2 mb-2" href="{% url 'community:detail' review.pk %}" class="btn">Read more</a>
       </div>
     </div>
   </div>
@@ -260,7 +260,7 @@ div.card {
           const btn = document.querySelector(`#btn-${pk}`)
           const txt = document.querySelector(`#txt-${pk}`)
           if (res.data.is_like) {
-            btn.setAttribute('style', "color:#FF5252")
+            btn.setAttribute('style', "color:#a226f5")
             btn.setAttribute('class', "fas fa-thumbs-up fa-lg")
           } else {
             btn.setAttribute('style', "color:black;")
@@ -304,6 +304,6 @@ div.card {
     }
   })
 </script>
-  
+  {% include 'footer.html' %}
 </body>
 </html>
