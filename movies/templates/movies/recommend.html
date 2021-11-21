@@ -1,27 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
+  
 
 <h1>recommend</h1>
 
 {% if genre_movies %}
-  <p>{{ user.username }}님이 선호하시는 {{ genre_pick }} 장르 영화들</p>
+  <p>{{ user.username }}님이 선호하는 {{ genre_pick }}장르 영화</p>
   {% for genre_movie in genre_movies %}
-    {{ genre_movie.title }}
+    <img src="{{ genre_movie.poster_path }}"  width="200px" height="300px">
   {% endfor %}
 {% endif %}
 <hr>
 
 {% if following_movies %}
-  <p>{{ user.username }}님이 팔로우하는 유저들의 인생 영화들</p>
+  <p>{{ user.username }}님이 팔로우하는 유저의 인생 영화</p>
   {% for following_movie in following_movies %}
-  {{ following_movie }}
+    <img src="{{ following_movie.poster_path }}"  width="200px" height="300px">
   {% endfor %}
 {% endif %}
 <hr>
 
-{% comment %} {{directors}}
-{{ director_lst }}
-{{ director_movies }}
-<h1>
-{{user_movies}} {% endcomment %}
+
+
 {% endblock  %}
+</body>
+</html>
