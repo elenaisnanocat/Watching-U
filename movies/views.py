@@ -1,8 +1,9 @@
 from django.http.response import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.views.decorators.http import require_GET, require_POST, require_http_methods, require_safe
 from .models import Genre, Movie
 from django.db.models import Avg
+import random
 
 
 # Create your views here.
@@ -73,17 +74,61 @@ def search(request):
 @require_safe
 def recommend(request):
     movies = Movie.objects.all()
+    genre_pick = None
+    genre_movies = None
+    following_movies = []
+    directors = []
+    director_lst = []
+    director_movies = []
     if request.user.is_authenticated:
         user = request.user
+        # 선호 장르 
         if user.review_set:
-            genres = user.review_set.order_by('-rank')[0]
-            genres = genres.genres
+            review = user.review_set.order_by('-rank')[0]
+            genres = review.movie.genres.all()
+
+            genre_lst = []
+            for genre in genres:
+                genre_lst.append(genre)
+
+            genre_pick = random.choice(genre_lst)
+            genre_movies = Movie.objects.filter(genres=genre_pick)
+                
+
+        # 선호 감독
+        # user_movies = []
+        # if user.review_set:
+        #     for review in user.review_set.all():
+        #         user_movies.append(review.movie)
+        #         directors.append(review.movie.director)
+        # if user.want_movies:
+        #     user_movies.extend(user.want_movies.all())
+        #     for movie in user.want_movies.all():
+        #         directors.append(movie.director)
+        # for director in directors:
+        #     if Movie.objects.filter(director = director):
+        #         if Movie.objects.filter(director = director) in user_movies:
+        #             break
+        #         director_lst.append(director)
+        #         director_movies.append(Movie.objects.filter(director = director))
             
-            context = {
-                'genres': genres
-            }
-        else:
-            context = {
-                'movies':movies
-            }
+
+        # 팔로우 
+        if user.followings:
+            followings = user.followings.all()
+            
+            for following in followings:
+                if following.review_set.all():
+                    review = following.review_set.order_by('-rank')[0]
+                    following_movies.append(review.movie)
+            
+
+    context = {
+        'movies':movies,
+        'genre_pick': genre_pick,
+        'genre_movies': genre_movies,
+        'following_movies': following_movies,
+        'director_lst': director_lst,
+        'directors': directors,
+    }
     return render(request, 'movies/recommend.html', context)

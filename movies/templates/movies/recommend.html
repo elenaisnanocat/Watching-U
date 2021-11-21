@@ -3,13 +3,25 @@
 
 <h1>recommend</h1>
 
-{{ user.review_set.all|length }}
-{% if user.review_set.all|length != 0 %}
-  {% comment %} {% for genre in genres %}
-    <p>{{ genre }}</p>
-  {% endfor %} {% endcomment %}
-  {{ genres }}
-
+{% if genre_movies %}
+  <p>{{ user.username }}님이 선호하시는 {{ genre_pick }} 장르 영화들</p>
+  {% for genre_movie in genre_movies %}
+    {{ genre_movie.title }}
+  {% endfor %}
 {% endif %}
+<hr>
 
+{% if following_movies %}
+  <p>{{ user.username }}님이 팔로우하는 유저들의 인생 영화들</p>
+  {% for following_movie in following_movies %}
+  {{ following_movie }}
+  {% endfor %}
+{% endif %}
+<hr>
+
+{% comment %} {{directors}}
+{{ director_lst }}
+{{ director_movies }}
+<h1>
+{{user_movies}} {% endcomment %}
 {% endblock  %}
