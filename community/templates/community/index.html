@@ -207,7 +207,13 @@ div.card {
     </div>
     <div class="card-flap flap1 ">
       <div class="card-description ">
-        <p class="d-flex justify-content-center">{{ review.rank }}점 / 10점</p>
+        <p class="d-flex justify-content-center">
+
+        
+          {{ review.rank }}점 / 5점</p>
+
+
+
           <div class="d-flex justify-content-center">
           <form class="like-form" data-pk="{{ review.pk }}">
             {% csrf_token %}
