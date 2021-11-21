@@ -39,7 +39,7 @@
 <div>
 {% for review in movie.review_set.all %}
   <a href="{% url 'community:detail' review.pk %}">
-    <p>별 {{ review.rank }} / 5개</p>
+    <p>별 {{ review.rank }} / 5개</p> 
     <p>{{ review.user }} - {{ review.content }}</p>
     {{ review.updated_at|naturaltime }}
   </a>
