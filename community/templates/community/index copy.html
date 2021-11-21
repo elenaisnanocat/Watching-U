@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% for review in reviews %}
+
+<img src="{{ review.movie.poster_path }}" alt="" width="300px" height="400px">
+<p>{{ review.movie.title }}</p>
+<a href="{% url 'community:detail' review.pk %}">
+<p>{{ review.title }}</p>
+</a>
+
+<p>{{ review.rank }}점 / 10점</p>
+<form class="like-form" data-pk="{{ review.pk }}">
+  {% csrf_token %}
+  {% if user in review.like_users.all %}
+    <button id="btn-{{ review.pk }}">좋아요 취소</button>
+  {% else %}
+    <button id="btn-{{ review.pk }}">좋아요</button>
+  {% endif %}
+</form>
+<p><span id="txt-{{ review.pk }}">{{ review.like_users.all|length }}</span> 명이 이 글을 좋아합니다.</p>
+<hr>
+{% endfor %}
+
+{% endblock  %}
+
+
+{% block script %}
+<script>
+const forms = document.querySelectorAll('.like-form')
+forms.forEach(function (form) {
+  form.addEventListener('submit', function (event) {
+    event.preventDefault()
+    const pk = form.dataset.pk
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+    axios({
+      method: 'POST',
+      url: `${pk}/like/`,
+      headers: {
+        'X-CSRFToken': csrftoken
+      }
+    })
+    .then(res => {
+      const btn = document.querySelector(`#btn-${pk}`)
+      const txt = document.querySelector(`#txt-${pk}`)
+      if (res.data.is_like) {
+        btn.innerText = '좋아요 취소'
+      } else {
+        btn.innerText = '좋아요'
+      }
+      txt.innerText = res.data.cnt_like
+    })
+    .catch(err => {
+      console.log(err)
+      if (err.response.status === 401) {
+        document.location.href = '/accounts/login'
+      }
+    })
+  })
+})
+
+</script>
+{% endblock script %}
