@@ -2,29 +2,36 @@
 {% block content %}
 
 
-<h1>{{ person.username }}</h1>
 
-<img src={% if person.profile.image %}"{{ person.profile.image.url }}"{% endif %}"https://i.stack.imgur.com/34AD2.jpg" alt="">
 
-{% if user == person %}
-<a href="{% url 'accounts:update' %}">회원정보 수정</a>
-{% endif %}
+<div class="row">
+<div class="col-md-12 text-center">
+  <img style="border-radius: 50%" src={% if person.profile.image %}"{{ person.profile.image.url }}"{% endif %}"https://i.stack.imgur.com/34AD2.jpg" width=250 height=250>
+  <h3>{{ person.username }}</h3>
+  <p>{{ person.profile.description }}</p>
+  {% if user == person %}
+  <a href="{% url 'accounts:update' %}"><button type="button" class="btn btn-outline-secondary">회원정보 수정</a>
+  {% else %}
+  <form id="follow-form" action="{% url 'accounts:follow' person.pk %}" method="POST">
+    {% csrf_token %}
+    {% if user in person.followers.all %}
+      <button class="btn btn-outline-secondary">팔로우 취소</button>
+    {% else %}
+      <button>팔로우</button>
+    {% endif %}
+  </form>
+  {% endif %}
+</div>
+</div>
+
+
 
 <p>{{ person.username }}님의 총 영화 감상시간은 {{ user_runtime }}시간</p>
 
 <a href="{% url 'movies:home' %}">Home</a>
 <hr>
-팔로잉 : <span id="followings">{{ person.followings.all|length }}</span>  팔로워 : <span id="followers">{{ person.followers.all|length }}</span>
-{% if user != person %}
-  <form id="follow-form" action="{% url 'accounts:follow' person.pk %}" method="POST">
-    {% csrf_token %}
-    {% if user in person.followers.all %}
-      <button>팔로우 취소</button>
-    {% else %}
-      <button>팔로우</button>
-    {% endif %}
-  </form>
-{% endif %}
+{{ person.review_set.all|length }} 평가 | <span id="followings">{{ person.followings.all|length }}</span> 팔로잉 | <span id="followers">{{ person.followers.all|length }}</span> 팔로워
+
 
 <hr>
 <h2>{{person.username}} 님이 평가한 영화 목록</h2>
