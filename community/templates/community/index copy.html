@@ -77,7 +77,7 @@ div.card {
   text-align: left;
   transition: all 0.3s 0s ease-in;
   width: 300px;
-  z-index: -1;
+  z-index: 1;
 
   img {
     max-width: 300px;
@@ -198,7 +198,7 @@ div.card {
     <div class="card__image-holder flip imgswap">
     {% comment %} flip imgswap으로 마우스 가져다대면 wordcloud 이미지 보임  {% endcomment %}
       <img id="poster" class="card__image" src="{{ review.movie.poster_path }}" alt="" width="300px" height="400px">
-    <img id="wordCloud" src="/static/{{review.movie.title}}.png" alt="" width="300px" height="400px">
+<img id="wordCloud" src="/static/{{review.movie.title}}.png" alt="" width="300px" height="400px">
     </div>
     <div class="card-title d-flex justify-content-center mb-0">
       <h5>
@@ -209,17 +209,10 @@ div.card {
       <div class="card-description ">
         <p class="d-flex justify-content-center m-0">
 
-          {% if review.rank == 1 %}
-          <i class="fas fa-star" style="color:#f389ef;"></i></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          {% elif review.rank == 2 %}
-          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          {% elif review.rank == 3 %}
-          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          {% elif review.rank == 4 %}
-          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="far fa-star"></i>
-          {% else%}
-          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="fas fa-star" style="color:#9400d3;"></i>{% endif %}
-         
+
+          {{ review.rank }}점 / 5점</p>
+
+
 
           <div class="d-flex justify-content-center">
           <form class="like-form" data-pk="{{ review.pk }}">
@@ -241,7 +234,9 @@ div.card {
   {% endfor %}
   </div>
 
+
   {% endblock content %}
+  
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
