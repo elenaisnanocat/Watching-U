@@ -74,6 +74,7 @@ def search(request):
 @require_safe
 def recommend(request):
     movies = Movie.objects.all()
+    movie = movies[0]
     genre_pick = None
     genre_movies = None
     following_movies = []
@@ -124,10 +125,12 @@ def recommend(request):
             
 
     context = {
-        'movies':movies,
+        'movie':movie,
         'genre_pick': genre_pick,
-        'genre_movies': genre_movies,
-        'following_movies': following_movies,
+        'genre_movie': genre_movies[0],
+        'genre_movies': genre_movies[1:],
+        'following_movie': following_movies[0],
+        'following_movies': following_movies[1:],
         'director_lst': director_lst,
         'directors': directors,
     }
