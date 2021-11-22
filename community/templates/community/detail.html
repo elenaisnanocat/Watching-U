@@ -26,36 +26,39 @@
   <div class="container backgr rounded"><br>
 
       <h2 class="d-flex justify-content-center text-white">Review</h2>
+      
         <div class="d-flex justify-content-end">
         <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'community:index' %}">[back]</a>
         <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'community:update' review.pk %}">[update]</a>
         </div>
-        <div class="container bg-white rounded">
-        <div class="row">
-        <h1 class="d-flex justify-content-center col-6 col align-self-center" >{{ review.title }}</h1>
+        <hr class="text-white">
+        <div class="container rounded">
+        <div class="row ">
+        <h1 class="d-flex justify-content-center col-6 col align-self-center text-white" >{{ review.title }}</h1>
         
         <div class="col-6"><br>
-        <a class="d-flex justify-content-center text-decoration-none text-dark" href="{% url 'accounts:profile' review.user %}"><작성자> {{ review.user }}</a>
-        <p class="d-flex justify-content-center"><a class="text-decoration-none text-dark " href="{% url 'movies:detail' review.movie.pk %}"><영화제목> {{ review.movie.title }}</a></p>
-        <p class="d-flex justify-content-center" >{{ review.rank }}점 / 5점</p>
-        <hr>
-        <p class="d-flex justify-content-center">{{ review.content }}</p>
-        <hr>
+        <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'accounts:profile' review.user %}"><작성자> {{ review.user }}</a>
+        <p class="d-flex justify-content-center"><a class="text-decoration-none text-white " href="{% url 'movies:detail' review.movie.pk %}"><영화제목> {{ review.movie.title }}</a></p>
+        <p class="d-flex justify-content-center text-white" >{{ review.rank }}점 / 5점</p>
+        <hr class="text-white">
+        <p class="d-flex justify-content-center text-white">{{ review.content }}</p>
+        <hr class="text-white">
         {% if review.user == request.user %}
           <form class="d-flex justify-content-center" action="{% url 'community:delete' review.pk %}" method="POST">
           {% csrf_token %}
-          <button class="btn btn-link text-decoration-none text-dark">[delete]</button>
+          <button class="btn btn-link text-decoration-none text-white">[delete]</button>
           </form></div>
           </div>
         {% endif %}
       </div><br>
 
-    <div>
-    <h2 class="d-flex justify-content-start text-white" >Comment</h2>
-    <table class="table text-white">
+    <div class="bg-white rounded offset-1 col-10">
+    <h2 class="d-flex justify-content-start " >Comment</h2>
+    
+    <table class="table ">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col"></th>
         <th scope="col">Username</th>
         <th scope="col">Content</th>
         <th scope="col"></th>
@@ -64,9 +67,9 @@
     <tbody>
       {% for comment in comments %}
       <tr>
-        <th scope="row">1</th>
-        <td>{{ comment.user }}</td>
-        <td>{{ comment.content }}</td>
+        <th scope="row"></th>
+        <td class="text-dark">{{ comment.user }}</td>
+        <td class="text-dark">{{ comment.content }}</td>
         <td>
         {% if review.user == request.user %}
         <form class="d-flex justify-content-center" action="{% url 'community:delete_comment' review.pk comment.pk %}" method="POST">
@@ -77,46 +80,36 @@
       </tr>
       {% endfor %} 
     </tbody>
-    </table>
+    </table><br>
     </div>
+    <br>
 
 
-      <div class="container bg-white d-flex justify-content-between rounded">
+      <div class="container bg-transparent bg-gradient d-flex justify-content-between rounded offset-1 col-10">
       {% if comments|length %}
-        <div class=" row align-items-center ">{{ comments|length }}개의 댓글이 있습니다.</div>
+        <div class=" row align-items- text-white">{{ comments|length }}개의 댓글이 있습니다.</div>
       {% endif %}
-
-      <div class="row align-items-center">
+      
+      <br> </div> <br>
       {% for comment in comments %}
-      {{ comment.user }}: {{ comment.content }}
-      </div>
-      {% if review.user == request.user %}
-        <form class="d-flex justify-content-center" action="{% url 'community:delete_comment' review.pk comment.pk %}" method="POST">
-        {% csrf_token %}
-        <button class="btn btn-link text-decoration-none text-dark" >댓글삭제</button>
-        </form>
-      {% endif %}
-        
       {% empty %}
-        <div class="d-flex justify-content-center row align-items-center"><b>댓글이 없어요..</b></div>
+        <div class="d-flex justify-content-center row align-items-center text-white"><b>댓글이 없어요..</b></div>
       {% endfor %} 
       
       {% if request.user.is_authenticated %}
-        <form class="d-flex justify-content-center" action="{% url 'community:create_comment' review.pk %}" method="POST">
+        <form class="offset-1" action="{% url 'community:create_comment' review.pk %}" method="POST">
         {% csrf_token %}
         {{ comment_form.as_p }}
-        <button class="btn btn-link text-decoration-none text-dark " >댓글등록</button>
+        <button class="btn btn-link text-decoration-none text-white" >댓글등록</button>
         </form>
       {% else %}
         <a class="d-flex justify-content-center" href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
       {% endif %}
 
-      
-      <br> </div> <br>
   </div>
-  <br><br>
-  {% endblock content %}
   
+  {% endblock content %}
+  <br><br>
 
 {% comment %} 
   <section>
