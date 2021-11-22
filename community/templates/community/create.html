@@ -1,10 +1,15 @@
+
 {% extends 'base.html' %}
 {% block content %}
 
-<form action="" method="POST">
-{% csrf_token %}
-{{ form.as_p }}
-<button>등록</button>
-</form>
-
+<br><br><br><br>
+<div class="container d-flex justify-content-center">
+  <div>
+    <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-link text-decoration-none" >Create</button>
+    </form>
+  </div>
+</div>
 {% endblock  %}

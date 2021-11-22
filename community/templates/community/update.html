@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form action="" method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button>Update</button>
-</form>
 
+<br><br><br><br>
+<div class="container d-flex justify-content-center">
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-link text-decoration-none ">Update</button>
+    </form>
+</div><br><br><br><br>
 {% endblock  %}
