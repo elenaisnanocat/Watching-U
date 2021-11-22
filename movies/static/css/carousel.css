@@ -33,7 +33,7 @@ html > p, body > p {
   user-select: none;
 }
 html > .carousel, body > .carousel {
-  padding-top: 125px;
+  padding-top: 50px;
 }
 
 .carousel {

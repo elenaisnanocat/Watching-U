@@ -100,8 +100,8 @@
 
 
 
-<div class="text-center bg-dark bg-gradient text-white">
-  <hr>
+<div class="text-center">
+  <hr style="border: solid 2px">
   reviews {{ person.review_set.all|length }} | 
   followings <span id="followings">{{ person.followings.all|length }}</span> | 
   followers <span id="followers">{{ person.followers.all|length }}</span> <br>
@@ -200,7 +200,7 @@
 {% include 'footer.html' %}
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

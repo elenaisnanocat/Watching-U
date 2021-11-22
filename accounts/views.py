@@ -47,7 +47,7 @@ def login(request):
     return render(request,'accounts/login.html', context)
 
 
-@require_POST
+#@require_POST
 def logout(request):
     if request.user.is_authenticated:
         auth_logout(request)

@@ -50,7 +50,7 @@
 }
 .post-slider .post-wrapper .post{
   width:300px;
-  height:500px;
+  height:550px;
   margin:0px 10px;
   display:inline-block;
   background:white;
@@ -63,7 +63,7 @@
 }
 .post-slider .post-wrapper .post .slider-image{
   width:100%;
-  height:350px;
+  height:500px;
   border-top-left-radius:5px;
   border-top-right-radius:5px;
 }
@@ -76,8 +76,6 @@
 
   
   {% block content %}
-
-
 
 
 
@@ -132,21 +130,20 @@
   {% include 'footer.html' %}
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <script>
 
 $('.post-wrapper').slick({
-  slidesToShow: 5,
+  slidesToShow: 3,
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 2000,
   nextArrow:$('.next'),
   prevArrow:$('.prev'),
 });
-
 
 
 
