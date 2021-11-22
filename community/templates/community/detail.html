@@ -40,6 +40,7 @@
         <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'accounts:profile' review.user %}"><작성자> {{ review.user }}</a>
         <p class="d-flex justify-content-center"><a class="text-decoration-none text-white " href="{% url 'movies:detail' review.movie.pk %}"><영화제목> {{ review.movie.title }}</a></p>
         <p class="d-flex justify-content-center text-white" >{{ review.rank }}점 / 5점</p>
+        
         <hr class="text-white">
         <p class="d-flex justify-content-center text-white">{{ review.content }}</p>
         <hr class="text-white">

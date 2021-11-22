@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Document</title>
 <style>
 {% comment %} 리뷰 목록 css {% endcomment %}
@@ -33,7 +33,6 @@
 <div class="p-4 pt-5 mb-3 mx-0 mt-3">
   <div class="container px-4 px-lg-5">
   
-    <h1>dfsf</h1>
     <div class="row gx-4 gx-lg-5 align-items-center my-5">
       
         <div id="carouselExampleControls" class="carousel slide col-lg-7" data-bs-ride="carousel">
@@ -61,38 +60,52 @@
 
 
       <div class="col-lg-5">
+        <div class="d-flex justify-content-center">
         <h2>{{ movie.title }}</h2>
-
-        {% if comments_cnt != 0 %}
-            <div >average | {{ average }}</div>
-        {% endif %}
-
-        <br>
-        {% for genre in movie.genres.all %}
-        {{ genre.name }}
-        {% endfor %}
-        <br>
-        {{ movie.overview }}
-        <br>
-        {{ movie.actors }}
-        <br>
-        {{ movie.runtime }}분
-        <br>
-        {{ movie.release_date }}
-        <br>
 
         <form class="want-form" action="{% url 'movies:want' movie.pk %}">
           {% csrf_token %}
           {% if user in movie.want_users.all %}
-            <button id="btn">보고싶어요 취소</button>
+            <button id="btn" class="btn btn-link text-decoration-none"><i class="fas fa-bookmark fa-lg" style="color:#a226f5;"></i></button>
           {% else %}
-            <button id="btn">보고싶어요</button>
+            <button id="btn" class="btn btn-link text-decoration-none"><i class="far fa-bookmark fa-lg" style="color:black;"></i></button>
           {% endif %}
         </form>
-        {% comment %} <div>
+        </div>
+        {% if comments_cnt != 0 %}
+          <div >average | 
+         {% if average == 1 %}
+          <i class="fas fa-star" style="color:#f389ef;"></i></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          {% elif average == 2 %}
+          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          {% elif average == 3 %}
+          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          {% elif average == 4 %}
+          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="far fa-star"></i>
+          {% else%}
+          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="fas fa-star" style="color:#9400d3;"></i>{% endif %}
+        </div>{% endif %}
+
+        <br>Genre | 
+        {% for genre in movie.genres.all %}
+         {{ genre.name }}
+        {% endfor %}
+        <br>
+        Runtime | {{ movie.runtime }}분  |
+        Release | {{ movie.release_date }}
+        <hr>
+        Actor | <br>
+        {{ movie.actors }}
+        <br><br>
+        <p class="">{{ movie.overview }}</p>
+        <br>
+        <br>
+        <br>
+
+        
+        <div>
         <iframe class="video-trailer" src="" frameborder="0"></iframe>
         </div>
-       {% endcomment %}
       </div>
     </div>
 
@@ -103,33 +116,40 @@
 
 <br>
 
-<hr>
+<hr><h2 class="d-flex justify-content-center">Review list</h2>
 {% for review in movie.review_set.all %}
 <div class="row d-flex justify-content-center ">
   <div class="boxx col-1" id="g6">
-    <p class="text-white d-flex justify-content-center fw-bold fs-3 mb-1">{{ review.user }}</p>
+    <p class="text-white d-flex justify-content-center fw-bold fs-3 mb-1 ">{{ review.user }}</p>
     <img class="rounded mx-auto d-block" src={% if review.user.profile.image %}"{{ review.user.profile.image.url }}"{% endif %}"https://i.stack.imgur.com/34AD2.jpg" alt="" width="50%" height="auto">
   </div>
 
+
+
   <div class="boxx col-5 offset-1" id="g6">
-    <p class="text-white">별 {{ review.rank }} / 5개</p> 
+    <p class="text-white">Review rank |
+          {% if review.rank == 1 %}
+          <i class="fas fa-star" style="color:#f389ef;"></i></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          {% elif review.rank == 2 %}
+          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          {% elif review.rank == 3 %}
+          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          {% elif review.rank == 4 %}
+          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="far fa-star"></i>
+          {% else%}
+          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="fas fa-star" style="color:#9400d3;"></i>{% endif %}
+    </p>
+    
+    <div class="d-flex justify-content-between">
     <p class="text-white">{{ review.content }}</p>
-    <div class="text-white">{{ review.updated_at|naturaltime }}</div>
-    <a class="text-white text-decoration-none" href="{% url 'community:detail' review.pk %}">게시물로 바로가기</a>
+    <div class="text-white">{{ review.updated_at|naturaltime }}</div></div>
+    <a class="text-white text-decoration-none" href="{% url 'community:detail' review.pk %}">Review readmore</a>
   </div>
 </div>
 {% endfor %}
 
 {% endblock content %}
   
-
-
-  <section>
-  <h1>dd</h1>
-  
-  </section>
-
-
 
   <script>
 // 보고싶어요
@@ -149,9 +169,13 @@ form.addEventListener('submit', (event) => {
     const btn = document.querySelector('#btn')
     const txt = document.querySelector('#txt')
     if (res.data.is_want) {
-      btn.innerText = '보고싶어요 취소'
+  
+      btn.setAttribute('style', "color:#a226f5")
+      btn.setAttribute('class', "fas fa-thumbs-up fa-lg")
     } else {
-      btn.innerText = '보고싶어요'
+
+      btn.setAttribute('style', "color:black;")
+      btn.setAttribute('class', "fas fa-thumbs-up fa-lg")
     }
      txt.innerText = res.data.cnt_want
    })
