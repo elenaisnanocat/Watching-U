@@ -1,50 +1,136 @@
-{% extends 'base.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <title>Document</title>
 
-<h2>Review</h2>
-  <a href="{% url 'community:index' %}">[back]</a>
-  <a href="{% url 'community:update' review.pk %}">[update]</a>
-  <h1>{{ review.title }}</h1>
-  <a href="{% url 'accounts:profile' review.user %}">{{ review.user }}</a>
-  <p><a href="{% url 'movies:detail' review.movie.pk %}">{{ review.movie.title }}</a></p>
-  <p>{{ review.rank }}점 / 10점</p>
-  <hr>
-  <p>{{ review.content }}</p>
-  <hr>
-  {% if review.user == request.user %}
-    <form action="{% url 'community:delete' review.pk %}" method="POST">
-    {% csrf_token %}
-    <button>delete</button>
-    </form>
-  {% endif %}
+<style>
+.backgr {
+  justify-content: center;
+  align-items: center;
+  background: url("https://static.hubzum.zumst.com/hubzum/2018/02/09/09/898713447d8a4848834ef018e42452f2.jpg") no-repeat center;
+  background-size: cover;
+}
+</style>
 
-<h2>Comment</h2>
-{% if comments|length %}
-  <p>{{ comments|length }}개의 댓글이 있습니다.</p>
-{% endif %}
+{% comment %} class="d-flex justify-content-center" {% endcomment %}
+</head>
+<body class="bg-light bg-gradient">
+  {% include 'nav.html' %}
 
-{% if request.user.is_authenticated %}
-  <form action="{% url 'community:create_comment' review.pk %}" method="POST">
-  {% csrf_token %}
-  {{ comment_form.as_p }}
-  <button>댓글등록</button>
-  </form>
-{% else %}
-  <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
-{% endif %}
+<br><br>
+  {% block content %}
+  <div class="container backgr rounded"><br>
+
+      <h2 class="d-flex justify-content-center text-white">Review</h2>
+        <div class="d-flex justify-content-end">
+        <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'community:index' %}">[back]</a>
+        <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'community:update' review.pk %}">[update]</a>
+        </div>
+        <div class="container bg-white rounded">
+        <div class="row">
+        <h1 class="d-flex justify-content-center col-6 col align-self-center" >{{ review.title }}</h1>
+        
+        <div class="col-6"><br>
+        <a class="d-flex justify-content-center text-decoration-none text-dark" href="{% url 'accounts:profile' review.user %}"><작성자> {{ review.user }}</a>
+        <p class="d-flex justify-content-center"><a class="text-decoration-none text-dark " href="{% url 'movies:detail' review.movie.pk %}"><영화제목> {{ review.movie.title }}</a></p>
+        <p class="d-flex justify-content-center" >{{ review.rank }}점 / 5점</p>
+        <hr>
+        <p class="d-flex justify-content-center">{{ review.content }}</p>
+        <hr>
+        {% if review.user == request.user %}
+          <form class="d-flex justify-content-center" action="{% url 'community:delete' review.pk %}" method="POST">
+          {% csrf_token %}
+          <button class="btn btn-link text-decoration-none text-dark">[delete]</button>
+          </form></div>
+          </div>
+        {% endif %}
+      </div><br>
+
+    <div>
+    <h2 class="d-flex justify-content-start text-white" >Comment</h2>
+    <table class="table text-white">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Content</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for comment in comments %}
+      <tr>
+        <th scope="row">1</th>
+        <td>{{ comment.user }}</td>
+        <td>{{ comment.content }}</td>
+        <td>
+        {% if review.user == request.user %}
+        <form class="d-flex justify-content-center" action="{% url 'community:delete_comment' review.pk comment.pk %}" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-link text-decoration-none text-white" >X</button>
+        </form>
+        {% endif %}</td>
+      </tr>
+      {% endfor %} 
+    </tbody>
+    </table>
+    </div>
 
 
-{% for comment in comments %}
-{{ comment.user }}: {{ comment.content }}
-{% if review.user == request.user %}
-  <form action="{% url 'community:delete_comment' review.pk comment.pk %}" method="POST">
-  {% csrf_token %}
-  <button>댓글삭제</button>
-  </form>
-{% endif %}
+      <div class="container bg-white d-flex justify-content-between rounded">
+      {% if comments|length %}
+        <div class=" row align-items-center ">{{ comments|length }}개의 댓글이 있습니다.</div>
+      {% endif %}
+
+      <div class="row align-items-center">
+      {% for comment in comments %}
+      {{ comment.user }}: {{ comment.content }}
+      </div>
+      {% if review.user == request.user %}
+        <form class="d-flex justify-content-center" action="{% url 'community:delete_comment' review.pk comment.pk %}" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-link text-decoration-none text-dark" >댓글삭제</button>
+        </form>
+      {% endif %}
+        
+      {% empty %}
+        <div class="d-flex justify-content-center row align-items-center"><b>댓글이 없어요..</b></div>
+      {% endfor %} 
+      
+      {% if request.user.is_authenticated %}
+        <form class="d-flex justify-content-center" action="{% url 'community:create_comment' review.pk %}" method="POST">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button class="btn btn-link text-decoration-none text-dark " >댓글등록</button>
+        </form>
+      {% else %}
+        <a class="d-flex justify-content-center" href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
+      {% endif %}
+
+      
+      <br> </div> <br>
+  </div>
+  <br><br>
+  {% endblock content %}
   
-{% empty %}
-  <p><b>댓글이 없어요..</b></p>
-{% endfor %}
 
-{% endblock  %}
+{% comment %} 
+  <section>
+  <h1></h1>
+  </section> {% endcomment %}
+
+
+
+  <script>
+
+  </script>
+
+{% include 'footer.html' %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>

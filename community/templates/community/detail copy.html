@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Review</h2>
+  <a href="{% url 'community:index' %}">[back]</a>
+  <a href="{% url 'community:update' review.pk %}">[update]</a>
+  <h1>{{ review.title }}</h1>
+  <a href="{% url 'accounts:profile' review.user %}">{{ review.user }}</a>
+  <p><a href="{% url 'movies:detail' review.movie.pk %}">{{ review.movie.title }}</a></p>
+  <p>{{ review.rank }}점 / 10점</p>
+  <hr>
+  <p>{{ review.content }}</p>
+  <hr>
+  {% if review.user == request.user %}
+    <form action="{% url 'community:delete' review.pk %}" method="POST">
+    {% csrf_token %}
+    <button>delete</button>
+    </form>
+  {% endif %}
+
+<h2>Comment</h2>
+{% if comments|length %}
+  <p>{{ comments|length }}개의 댓글이 있습니다.</p>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+  <form action="{% url 'community:create_comment' review.pk %}" method="POST">
+  {% csrf_token %}
+  {{ comment_form.as_p }}
+  <button>댓글등록</button>
+  </form>
+{% else %}
+  <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
+{% endif %}
+
+
+{% for comment in comments %}
+{{ comment.user }}: {{ comment.content }}
+{% if review.user == request.user %}
+  <form action="{% url 'community:delete_comment' review.pk comment.pk %}" method="POST">
+  {% csrf_token %}
+  <button>댓글삭제</button>
+  </form>
+{% endif %}
+  
+{% empty %}
+  <p><b>댓글이 없어요..</b></p>
+{% endfor %}
+
+{% endblock  %}
