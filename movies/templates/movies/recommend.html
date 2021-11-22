@@ -88,12 +88,6 @@
     <i class="fas fa-chevron-left prev"></i>  
     <i class="fas fa-chevron-right next"></i>
     <div class="post-wrapper">
-      <div class="post">
-        <a href="{% url 'movies:detail' genre_movie.pk %}"><img src="{{ genre_movie.poster_path }}" class="slider-image"></a>
-        <div class="post-info text-center">
-          <i class="far fa-user" style="height:10%;">{{ genre_movie.title }}</i>
-        </div>
-      </div>
       {% if genre_movies %}
         {% for genre_movie in genre_movies %}
         <div class="post">
@@ -116,12 +110,6 @@
     <i class="fas fa-chevron-left prev"></i>  
     <i class="fas fa-chevron-right next"></i>
     <div class="post-wrapper">
-      <div class="post">
-        <a href="{% url 'movies:detail' following_movie.pk %}"><img src="{{ following_movie.poster_path }}" class="slider-image"></a>
-        <div class="post-info text-center">
-          <i class="far fa-user" style="height:10%;">{{ following_movie.title }}</i>
-        </div>
-      </div>
       {% if following_movies %}
         {% for following_movie in following_movies %}
         <div class="post">
@@ -137,29 +125,6 @@
 </div>
 
 
-
-<h1>Recommend</h1>
-
-{% comment %} {% if genre_movies %}
-  <p>{{ user.username }}님이 선호하는 {{ genre_pick }}장르 영화</p>
-  {% for genre_movie in genre_movies %}
-    <img src="{{ genre_movie.poster_path }}"  width="200px" height="300px">
-  {% endfor %}
-{% endif %}
-<hr> {% endcomment %}
-
-{% if following_movies %}
-  <p>{{ user.username }}님이 팔로우하는 유저의 인생 영화</p>
-  {% for following_movie in following_movies %}
-    <img src="{{ following_movie.poster_path }}"  width="200px" height="300px">
-  {% endfor %}
-{% endif %}
-<hr>
-
-
-<div style="width: 500px; height:300px;">
-  <canvas id="rankChart"></canvas>
-</div>
 
 
 {% endblock  %}
@@ -183,23 +148,6 @@ $('.post-wrapper').slick({
 });
 
 
-const ctx = document.getElementById('rankChart').getContext('2d');
-console.log(ctx)
-  const rankChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-          labels: ['d','d','d','d','d'],
-          datasets: [{
-              label: '# of Votes',
-              data: [1,2,3,4,5],
-              borderColor: [
-                  'rgb(75, 192, 192)',
-              ],
-              fill: true,
-              lineTension: 0.5
-          }]
-      },
-  });
 
 
 </script>

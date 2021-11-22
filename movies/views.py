@@ -127,10 +127,8 @@ def recommend(request):
     context = {
         'movie':movie,
         'genre_pick': genre_pick,
-        'genre_movie': genre_movies[0],
-        'genre_movies': genre_movies[1:],
-        'following_movie': following_movies[0],
-        'following_movies': following_movies[1:],
+        'genre_movies': genre_movies,
+        'following_movies': following_movies,
         'director_lst': director_lst,
         'directors': directors,
     }
