@@ -1,15 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Estonia&display=swap');
-/* @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css); 제주명조 깔끔쓰한 느낌*/
+@import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css); 
 
 * {margin: 0; padding: 0; box-sizing: border-box;}
 body {
-    font-family: 'Estonia', cursive;
-    /* font-family: 'Jeju Myeongjo', serif; 제주명조 깔끔쓰한 느낌*/
+    font-family: 'Jeju Myeongjo', serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: url("https://cdn.pixabay.com/photo/2021/06/16/20/22/cat-6342145_960_720.jpg") no-repeat center;
+    background: url("https://p4.wallpaperbetter.com/wallpaper/291/952/995/the-grand-budapest-hotel-wallpaper-preview.jpg") no-repeat center;
     background-size: cover;
     /* 배경 사이즈 창 크기에 맞춰서 조절 */
     padding: 0;
@@ -19,7 +17,7 @@ body::before {
     content: "";
     position: absolute; z-index: 1;
     top:0; right: 0; bottom: 0; left: 0;
-    background-color: rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,.8);
 }
 
 .login-form {position: relative; z-index: 2;}
