@@ -191,13 +191,17 @@
     <div class="d-flex justify-content-between">
     <p class="text-white">{{ review.content }}</p>
     <div class="text-white">{{ review.updated_at|naturaltime }}</div></div>
-    <a class="text-white text-decoration-none" href="{% url 'community:detail' review.pk %}">readmore</a>
+    <a class="text-white text-decoration-none" href="{% url 'community:detail' review.pk %}">more</a>
   </div>
 </div>
 {% endfor %}
 
 {% endblock content %}
   
+<<<<<<< HEAD
+=======
+
+>>>>>>> a8031963b0625ccd30c78a379259e9366b84e3e5
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
