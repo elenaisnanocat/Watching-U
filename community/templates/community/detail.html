@@ -106,14 +106,14 @@
 
       <div class=" bg-transparent bg-gradient  rounded offset-1 col-10">
       {% if comments|length %}
-        <div class="  text-white">{{ comments|length }}개의 댓글이 있습니다.</div>
+        <div class="  text-dark">{{ comments|length }}개의 댓글이 있습니다.</div>
       {% endif %}
       </div> <br>
 
       <div class=" bg-transparent bg-gradient  rounded offset-1 col-10">
       {% for comment in comments %}
       {% empty %}
-        <div class="text-white"><b>댓글이 없어요..</b></div>
+        <div class="text-dark"><b>댓글이 없어요..</b></div>
       <br>
       {% endfor %} 
       </div> 
@@ -122,7 +122,7 @@
         <form class="offset-1" action="{% url 'community:create_comment' review.pk %}" method="POST">
         {% csrf_token %}
         {{ comment_form.as_p }}
-        <button class="btn btn-link text-decoration-none text-white" >댓글등록</button>
+        <button class="btn btn-link text-decoration-none text-dark" >댓글등록</button>
         </form>
       {% else %}
         <a class="d-flex justify-content-center" href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
