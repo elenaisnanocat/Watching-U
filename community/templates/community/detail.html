@@ -104,10 +104,14 @@
         <div class="  text-white">{{ comments|length }}개의 댓글이 있습니다.</div>
       {% endif %}
       </div> <br>
+
+      <div class=" bg-transparent bg-gradient  rounded offset-1 col-10">
       {% for comment in comments %}
       {% empty %}
-        <div class="d-flex justify-content-center row align-items-center text-white"><b>댓글이 없어요..</b></div>
+        <div class="text-white"><b>댓글이 없어요..</b></div>
+      <br>
       {% endfor %} 
+      </div> 
       
       {% if request.user.is_authenticated %}
         <form class="offset-1" action="{% url 'community:create_comment' review.pk %}" method="POST">
