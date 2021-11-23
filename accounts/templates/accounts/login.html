@@ -9,6 +9,8 @@
   <title>Document</title>
   <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
   {% comment %} <script type="text/javascript" src="{% static 'js/file.js' %}" ></script> {% endcomment %}
+
+  
   <script src="https://code.jquery.com/jquery-3.4.1.js"   
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="   
 	crossorigin="anonymous"></script>
@@ -26,6 +28,7 @@
           <button id="btn">Login</button>
         </div>
     </form>
+    <li><a class="btn-area" href="{% url 'accounts:signup' %}"><button>Signup</button></a></li>
   </section>
 
   <script>

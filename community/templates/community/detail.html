@@ -37,22 +37,22 @@
         <div class="row ">
         <h1 class="d-flex justify-content-center col-6 col align-self-center text-white" >{{ review.title }}</h1>
         
-        <div class="col-6"><br>
-        <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'accounts:profile' review.user %}"><작성자> {{ review.user }}</a>
-        <p class="d-flex justify-content-center"><a class="text-decoration-none text-white " href="{% url 'movies:detail' review.movie.pk %}"><영화제목> {{ review.movie.title }}</a></p>
-        <p class="d-flex justify-content-center text-white" >
-        
-          {% if review.rank == 1 %}
-          <i class="fas fa-star" style="color:#f389ef;"></i></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          {% elif review.rank == 2 %}
-          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          {% elif review.rank == 3 %}
-          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          {% elif review.rank == 4 %}
-          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="far fa-star"></i>
-          {% else%}
-          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="fas fa-star" style="color:#9400d3;"></i>{% endif %}
-         </p>
+          <div class="col-6"><br>
+          <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'accounts:profile' review.user %}"><작성자> {{ review.user }}</a>
+          <p class="d-flex justify-content-center"><a class="text-decoration-none text-white " href="{% url 'movies:detail' review.movie.pk %}"><영화제목> {{ review.movie.title }}</a></p>
+          <p class="d-flex justify-content-center text-white" >
+          
+            {% if review.rank == 1 %}
+            <i class="fas fa-star" style="color:#f389ef;"></i></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            {% elif review.rank == 2 %}
+            <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            {% elif review.rank == 3 %}
+            <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            {% elif review.rank == 4 %}
+            <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="far fa-star"></i>
+            {% else%}
+            <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="fas fa-star" style="color:#9400d3;"></i>{% endif %}
+          </p>
         
         <hr class="text-white">
         <p class="d-flex justify-content-center text-white">{{ review.content }}</p>
@@ -61,9 +61,9 @@
           <form class="d-flex justify-content-center" action="{% url 'community:delete' review.pk %}" method="POST">
           {% csrf_token %}
           <button class="btn btn-link text-decoration-none text-white">[delete]</button>
-          </form></div>
+          </form>
+        {% endif %}</div>
           </div>
-        {% endif %}
       </div><br>
 
     <div class="bg-white rounded offset-1 col-10">
@@ -88,7 +88,7 @@
         {% if review.user == request.user %}
         <form class="d-flex justify-content-center" action="{% url 'community:delete_comment' review.pk comment.pk %}" method="POST">
         {% csrf_token %}
-        <button class="btn btn-link text-decoration-none text-white" >X</button>
+        <button class="btn btn-link text-decoration-none text-dark" >X</button>
         </form>
         {% endif %}</td>
       </tr>
@@ -99,12 +99,11 @@
     <br>
 
 
-      <div class="container bg-transparent bg-gradient d-flex justify-content-between rounded offset-1 col-10">
+      <div class=" bg-transparent bg-gradient  rounded offset-1 col-10">
       {% if comments|length %}
-        <div class=" row align-items- text-white">{{ comments|length }}개의 댓글이 있습니다.</div>
+        <div class="  text-white">{{ comments|length }}개의 댓글이 있습니다.</div>
       {% endif %}
-      
-      <br> </div> <br>
+      </div> <br>
       {% for comment in comments %}
       {% empty %}
         <div class="d-flex justify-content-center row align-items-center text-white"><b>댓글이 없어요..</b></div>
