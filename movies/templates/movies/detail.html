@@ -75,20 +75,19 @@
 
         {% if movie.review_set.all|length %}
           {% if average == 1 %}
-          <b>W.U 평점</b> | <i class="fas fa-star" style="color:#f389ef;"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <i class="fas fa-star" style="color:#f389ef;"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
           {% elif average == 2 %}
-          <b>W.U 평점</b> | <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
           {% elif average == 3 %}
-          <b>W.U 평점</b> | <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="far fa-star"></i><i class="far fa-star"></i>
           {% elif average == 4 %}
-          <b>W.U 평점</b> | <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="far fa-star"></i>
+          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="far fa-star"></i>
           {% elif average == 5 %}
-          <b>W.U 평점</b> | <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="fas fa-star" style="color:#9400d3;"></i>
+          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="fas fa-star" style="color:#9400d3;"></i>
           {% endif %}
         {% else %}
-          <b>W.U 평점</b> | <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          average | <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
         {% endif %}
-        
 
         <br><b>개요</b>
         {% for genre in movie.genres.all %}
@@ -117,6 +116,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -124,18 +124,20 @@
 
 <br>
 
-<hr><h2 class="d-flex justify-content-center">Review list</h2>
+<hr><h2 class="d-flex justify-content-center">Reviews</h2>
 {% for review in movie.review_set.all %}
 <div class="row d-flex justify-content-center ">
   <div class="boxx col-1" id="g6">
     <p class="text-white d-flex justify-content-center fw-bold fs-3 mb-1 ">{{ review.user }}</p>
-    <img class="rounded mx-auto d-block" src={% if review.user.profile.image %}"{{ review.user.profile.image.url }}"{% endif %}"https://i.stack.imgur.com/34AD2.jpg" alt="" width="50%" height="auto">
+    <div class="text-center">
+    <img class="border-radius: 50%" style="border-radius: 50%" src={% if review.user.profile.image %}"{{ review.user.profile.image.url }}"{% endif %}"https://i.stack.imgur.com/34AD2.jpg" alt="" width="50px" height="50px">
+    </div>
   </div>
 
 
 
   <div class="boxx col-5 offset-1" id="g6">
-    <p class="text-white">Review rank |
+    <p class="text-white">
           {% if review.rank == 1 %}
           <i class="fas fa-star" style="color:#f389ef;"></i></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
           {% elif review.rank == 2 %}
@@ -151,14 +153,15 @@
     <div class="d-flex justify-content-between">
     <p class="text-white">{{ review.content }}</p>
     <div class="text-white">{{ review.updated_at|naturaltime }}</div></div>
-    <a class="text-white text-decoration-none" href="{% url 'community:detail' review.pk %}">Review readmore</a>
+    <a class="text-white text-decoration-none" href="{% url 'community:detail' review.pk %}">readmore</a>
   </div>
 </div>
 {% endfor %}
 
 {% endblock content %}
   
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
 // 보고싶어요
 const form = document.querySelector('.want-form')
@@ -222,7 +225,6 @@ axios({
   </script>
 
   {% include 'footer.html' %}
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
 </body>
 </html>
