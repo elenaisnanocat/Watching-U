@@ -140,8 +140,6 @@
 
 <hr>
 
-
-<hr>
 <h2 class="d-flex justify-content-center">Reviews</h2>
 {% for review in movie.review_set.all %}
 <div class="row d-flex justify-content-center ">
@@ -171,7 +169,7 @@
     <div class="d-flex justify-content-between">
     <p class="text-white">{{ review.content }}</p>
     <div class="text-white">{{ review.updated_at|naturaltime }}</div></div>
-    <a class="text-white text-decoration-none" href="{% url 'community:detail' review.pk %}">more</a>
+    <a class="text-white text-decoration-none" href="{% url 'community:detail' review.pk %}">readmore</a>
   </div>
 </div>
 {% endfor %}
