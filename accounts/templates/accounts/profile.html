@@ -152,11 +152,11 @@
 <hr style="border: solid 2px"><p class="lead text-center fw-bold">{{ person.username }}님의 별점 분포</p><hr>
 
 
-  <div class="row justify-content-center p-3">
-    <div style="width: 1000px; height:300px;" class="col-md-12 text-center" >
-      <canvas id="rankChart"></canvas>
-    </div>
+<div class="row justify-content-center p-3">
+  <div style="width: 1000px; height:300px;" class="col-md-12 text-center" >
+    <canvas id="rankChart"></canvas>
   </div>
+</div>
 
 {% if user == person %}
 <div class="text-center m-5">
@@ -218,43 +218,6 @@ $('.post-wrapper').slick({
   prevArrow:$('.prev'),
 });
 
-
-
-
-const form = document.querySelector('#follow-form')
-const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
-
-form.addEventListener('submit', (event) => {
-  event.preventDefault()
-  axios({
-    method: 'POST',
-    url: form.action,
-    headers: {
-      'X-CSRFToken': csrftoken
-    }
-  })
-  .then(res => {
-    const btn = form.querySelector('button')
-    if (res.data.is_follow) {
-      btn.innerText = '팔로우 취소'
-    } else {
-      btn.innerText = '팔로우'
-    }
-
-    const followers = document.querySelector('#followers')
-    const followings = document.querySelector('#followings')
-
-    followers.innerText = res.data.cnt_follower
-    followings.innerText = res.data.cnt_following
-
-  })
-  .catch(err => {
-    console.log(err)
-  })
-
-})
-
-
 const ctx = document.getElementById('rankChart').getContext('2d');
 console.log(ctx)
   const rankChart = new Chart(ctx, {
@@ -298,6 +261,43 @@ console.log(ctx)
         },
     }
   });
+
+
+const form = document.querySelector('#follow-form')
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault()
+  axios({
+    method: 'POST',
+    url: form.action,
+    headers: {
+      'X-CSRFToken': csrftoken
+    }
+  })
+  .then(res => {
+    const btn = form.querySelector('button')
+    if (res.data.is_follow) {
+      btn.innerText = '팔로우 취소'
+    } else {
+      btn.innerText = '팔로우'
+    }
+
+    const followers = document.querySelector('#followers')
+    const followings = document.querySelector('#followings')
+
+    followers.innerText = res.data.cnt_follower
+    followings.innerText = res.data.cnt_following
+
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
+})
+
+
+
 
 
 

@@ -35,6 +35,7 @@ def detail(request, movie_pk):
             'comments_cnt': comments_cnt,
             'movie':movie,
             'average': average,
+            'actors':actors
     }
     else:
         context = {
