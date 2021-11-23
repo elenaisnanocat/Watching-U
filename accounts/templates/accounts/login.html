@@ -31,6 +31,8 @@
     </form>
     <li><a class="btn-area" href="{% url 'accounts:signup' %}"><button>Signup</button></a></li>
     <li><a class="btn-area" href="{% provider_login_url "google" next="/movies/" %}"><button>Google Signup</button></a></li>
+    <li><a class="btn-area" href="{% provider_login_url "github" next="/movies/" %}"><button>Gitgub Signup</button></a></li>
+    <li><a class="btn-area" href="{% provider_login_url "github" next="/movies/" %}"><img style="border-radius: 50%" src="{% static 'image/btn_google_signin.png' %}" alt=""></a></li>
 
   </section>
 
