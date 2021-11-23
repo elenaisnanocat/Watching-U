@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +30,7 @@
         </div>
     </form>
     <li><a class="btn-area" href="{% url 'accounts:signup' %}"><button>Signup</button></a></li>
+    {% comment %} <a href="{% provider_login_url "google" next="/movies/" %}">Google</a> {% endcomment %}
   </section>
 
   <script>
