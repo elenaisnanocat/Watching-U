@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>'{{ keyword }}' 검색 결과</h1>
-<h4>{{ movies|length }}개의 결과가 검색되었습니다.</h4>
+<div class="container">
+<div class="">
+{% comment %} <div class="d-flex justify-content-center"> {% endcomment %}
+
+<h1 class="d-flex justify-content-center">'{{ keyword }}' 검색 결과</h1><hr>
+<h4 class="d-flex justify-content-center">{{ movies|length }}개의 결과가 검색되었습니다.</h4><br><br><br>
 {% for movie in movies %}
-  <a href="{% url 'movies:detail' movie.pk %}">
-  <img src="{{ movie.poster_path }}" alt="{{ movie.title }}" width="300px" height="400px">
-  {{ movie.title }}
-  </a>
+  <a class="d-flex justify-content-center" href="{% url 'movies:detail' movie.pk %}">
+  <img class="d-flex justify-content-center" src="{{ movie.poster_path }}" alt="{{ movie.title }}" width="400px" height="550px">
+  </a><br>
+  <h4 class="d-flex justify-content-center">{{ movie.title }}</h4>
   <hr>
 {% endfor %}
+</div>
+</div></div>
 
 
 {% endblock  %}
