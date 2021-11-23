@@ -60,44 +60,53 @@
 
 
       <div class="col-lg-5">
-        <div class="d-flex justify-content-center">
+        <div class="d-flex ">
         <h2>{{ movie.title }}</h2>
 
         <form class="want-form" action="{% url 'movies:want' movie.pk %}">
           {% csrf_token %}
           {% if user in movie.want_users.all %}
-            <button id="btn" class="btn btn-link text-decoration-none"><i class="fas fa-bookmark fa-lg" style="color:#a226f5;"></i></button>
+            <button class="btn btn-link text-decoration-none"><i id="btn" class="fas fa-bookmark fa-lg" style="color:#a226f5;"></i></button>
           {% else %}
-            <button id="btn" class="btn btn-link text-decoration-none"><i class="far fa-bookmark fa-lg" style="color:black;"></i></button>
+            <button class="btn btn-link text-decoration-none"><i id="btn" class="far fa-bookmark fa-lg" style="color:black;"></i></button>
           {% endif %}
         </form>
         </div>
-        {% if comments_cnt != 0 %}
-          <div >average | 
-         {% if average == 1 %}
-          <i class="fas fa-star" style="color:#f389ef;"></i></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          {% elif average == 2 %}
-          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          {% elif average == 3 %}
-          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          {% elif average == 4 %}
-          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="far fa-star"></i>
-          {% else%}
-          <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="fas fa-star" style="color:#9400d3;"></i>{% endif %}
-        </div>{% endif %}
 
-        <br>Genre | 
+        {% if movie.review_set.all|length %}
+          {% if average == 1 %}
+          <b>W.U 평점</b> | <i class="fas fa-star" style="color:#f389ef;"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          {% elif average == 2 %}
+          <b>W.U 평점</b> | <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          {% elif average == 3 %}
+          <b>W.U 평점</b> | <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          {% elif average == 4 %}
+          <b>W.U 평점</b> | <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="far fa-star"></i>
+          {% elif average == 5 %}
+          <b>W.U 평점</b> | <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="fas fa-star" style="color:#9400d3;"></i>
+          {% endif %}
+        {% else %}
+          <b>W.U 평점</b> | <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+        {% endif %}
+        
+
+        <br><b>개요</b>
         {% for genre in movie.genres.all %}
          {{ genre.name }}
         {% endfor %}
-        <br>
-        Runtime | {{ movie.runtime }}분  |
-        Release | {{ movie.release_date }}
+        | {{ movie.runtime }}분 
+        | {{ movie.release_date|date:"Y년 m월 d일" }} <br>
+         
         <hr>
-        Actor | <br>
-        {{ movie.actors }}
-        <br><br>
-        <p class="">{{ movie.overview }}</p>
+        <b>감독</b> | {{ movie.director }} <br>
+        <b>출연</b> | 
+        {% for actor in actors %}
+          {{ actor }} <br>
+        {% endfor %}
+        <hr>
+        <b>줄거리</b> | {{ movie.overview }}
+        
+
         <br>
         <br>
         <br>
@@ -171,11 +180,11 @@ form.addEventListener('submit', (event) => {
     if (res.data.is_want) {
   
       btn.setAttribute('style', "color:#a226f5")
-      btn.setAttribute('class', "fas fa-thumbs-up fa-lg")
+      btn.setAttribute('class', "fas fa-bookmark fa-lg")
     } else {
 
       btn.setAttribute('style', "color:black;")
-      btn.setAttribute('class', "fas fa-thumbs-up fa-lg")
+      btn.setAttribute('class', "far fa-bookmark fa-lg")
     }
      txt.innerText = res.data.cnt_want
    })
@@ -192,7 +201,7 @@ form.addEventListener('submit', (event) => {
 const iframe = document.querySelector('.video-trailer')
 const query = "{{ movie.title }}" + " movie trailer"
 // console.log(query)
-const API_KEY = 'AIzaSyCksra3U-0IcBcAAvGMWR9wRb13BQIMnjM'
+const API_KEY = 'AIzaSyCer-i6W_BIpmteNaMCjg_h38sXtoT4hXk'
 const API_URL = 'https://www.googleapis.com/youtube/v3/search'
 
 const params = {

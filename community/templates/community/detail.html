@@ -29,18 +29,16 @@
       
         <div class="d-flex justify-content-end">
         <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'community:index' %}">[back]</a>
-        <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'community:update' review.pk %}">[update]</a>
+        
         </div>
         <hr class="text-white">
         <div class="container rounded">
         <div class="row ">
         <h1 class="d-flex justify-content-center col-6 col align-self-center text-white" >{{ review.title }}</h1>
-        
         <div class="col-6"><br>
         <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'accounts:profile' review.user %}"><작성자> {{ review.user }}</a>
         <p class="d-flex justify-content-center"><a class="text-decoration-none text-white " href="{% url 'movies:detail' review.movie.pk %}"><영화제목> {{ review.movie.title }}</a></p>
         <p class="d-flex justify-content-center text-white" >{{ review.rank }}점 / 5점</p>
-        
         <hr class="text-white">
         <p class="d-flex justify-content-center text-white">{{ review.content }}</p>
         <hr class="text-white">
@@ -49,10 +47,11 @@
           {% csrf_token %}
           <button class="btn btn-link text-decoration-none text-white">[delete]</button>
           </form></div>
+          <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'community:update' review.pk %}">[update]</a>
           </div>
         {% endif %}
       </div><br>
-
+    </div>
     <div class="bg-white rounded offset-1 col-10">
     <h2 class="d-flex justify-content-start " >Comment</h2>
     

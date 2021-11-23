@@ -19,14 +19,18 @@ def home(request):
     return render(request, 'movies/home.html', context)
 
 
+
 def detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
+    if '[' and ']' in movie.actors:
+            actors = eval(movie.actors)
+            
     comments_cnt = movie.review_set.count()
     if comments_cnt != 0:
         rank = movie.review_set.all().aggregate(Avg('rank'))
         averages = rank['rank__avg']
         average = int(averages)
-
+        
         context = {
             'comments_cnt': comments_cnt,
             'movie':movie,
@@ -36,8 +40,10 @@ def detail(request, movie_pk):
         context = {
             'comments_cnt': comments_cnt,
             'movie':movie,
+            'actors':actors
         }
     return render(request, 'movies/detail.html', context)
+
 
 
 @require_POST

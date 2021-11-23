@@ -33,7 +33,7 @@ def get_detail_credits(movie_id):
             director = crew['name']
             break
 
-    actors = [cast['name'] for cast in credits_response['cast']][:10]
+    actors = list(cast['name'] for cast in credits_response['cast'])[:10]
 
 
     context = {
@@ -57,7 +57,7 @@ def get_detail_credits(movie_id):
 
 
 # # 영화
-for i in range(3, 5):
+for i in range(5, 6):
     movie_url = f'https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}&language={language}&page={i}'
     movie_response = requests.get(movie_url).json().get('results')
 
