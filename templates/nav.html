@@ -30,6 +30,7 @@
                             <div>
                                 <div>
                                     <ul class="navlinks">
+                                        <li><a href="{% url 'movies:home' %}">Home</a></li>
                                         <li><a href="{% url 'community:index' %}">Community</a></li>
                                         {% if user.is_authenticated %}
                                         <li><a href="{% url 'accounts:profile' user.username %}">My Page</a></li>

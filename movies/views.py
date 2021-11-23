@@ -1,3 +1,4 @@
+from django.db.models.aggregates import Count, Max
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.views.decorators.http import require_GET, require_POST, require_http_methods, require_safe
@@ -74,7 +75,6 @@ def search(request):
 @require_safe
 def recommend(request):
     movies = Movie.objects.all()
-    movie = movies[0]
     genre_pick = None
     genre_movies = None
     following_movies = []
@@ -84,7 +84,7 @@ def recommend(request):
     if request.user.is_authenticated:
         user = request.user
         # 선호 장르 
-        if user.review_set:
+        if user.review_set.all():
             review = user.review_set.order_by('-rank')[0]
             genres = review.movie.genres.all()
 
@@ -115,21 +115,23 @@ def recommend(request):
             
 
         # 팔로우 
-        if user.followings:
+        if user.followings.all():
             followings = user.followings.all()
-            
             for following in followings:
-                if following.review_set.all():
+                if following.review_set.all().count() != 0:
                     review = following.review_set.order_by('-rank')[0]
                     following_movies.append(review.movie)
-            
+
+        
+        want_movies = Movie.objects.order_by('want_users')
 
     context = {
-        'movie':movie,
+        'movies':movies,
         'genre_pick': genre_pick,
         'genre_movies': genre_movies,
         'following_movies': following_movies,
         'director_lst': director_lst,
         'directors': directors,
+        'want_movies': want_movies
     }
     return render(request, 'movies/recommend.html', context)
