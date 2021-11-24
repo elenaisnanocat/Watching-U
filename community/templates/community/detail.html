@@ -55,15 +55,15 @@
             <i class="fas fa-star" style="color:#f389ef;"></i><i class="fas fa-star" style="color:#D36eec;"></i><i class="fas fa-star" style="color:#C65ff9;"></i><i class="fas fa-star" style="color:#c12dff;"></i><i class="fas fa-star" style="color:#9400d3;"></i>{% endif %}
           </p>
 
-        <hr class="text-white">
-        <p class="d-flex justify-content-center text-white">{{ review.content }}</p>
-        <hr class="text-white">
+        <hr class="text-white col-11">
+        <p class="d-flex justify-content-center text-white col-11">{{ review.content }}</p>
+        <hr class="text-white col-11">
         {% if review.user == request.user %}
           <form class="d-flex justify-content-center" action="{% url 'community:delete' review.pk %}" method="POST">
           {% csrf_token %}
           <button class="btn btn-link text-decoration-none text-white">[delete]</button>
           </form></div>
-          <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'community:update' review.pk %}">[update]</a>
+          <a class="d-flex justify-content-center text-decoration-none text-white p-3" href="{% url 'community:update' review.pk %}">[update]</a>
 
           </form>
         {% endif %}</div>
