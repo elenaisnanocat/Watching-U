@@ -9,6 +9,12 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   <title>Document</title>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+
+.jejumyeongjo * { 
+ font-family: 'Jeju Myeongjo', serif;
+}
+
 /*post slider*/
 .post-slider{
   width:100%;
@@ -66,7 +72,7 @@
 
 
 </head>
-<body>
+<body class="jejumyeongjo">
   {% include 'nav.html' %}
 
   
@@ -85,9 +91,9 @@
   <form id="follow-form" action="{% url 'accounts:follow' person.pk %}" method="POST">
     {% csrf_token %}
     {% if user in person.followers.all %}
-      <button class="btn btn-outline-secondary">팔로우 취소</button>
+      <button type="button" class="btn btn-outline-secondary">팔로우 취소</button>
     {% else %}
-      <button>팔로우</button>
+      <button type="button" class="btn btn-outline-secondary">팔로우</button>
     {% endif %}
   </form>
   {% endif %}
@@ -105,7 +111,7 @@
   reviews {{ person.review_set.all|length }} | 
   followings <span id="followings">{{ person.followings.all|length }}</span> | 
   followers <span id="followers">{{ person.followers.all|length }}</span> <br>
-  영화 감상 <div class="badge text-wrap" style="width: 6rem; background-color: purple;">총 {{ user_runtime }}시간</div>
+  영화 감상 <div class="badge text-wrap" style="width: 8rem; background-color: purple;">총 {{ user_runtime }}시간</div>
   <hr>
 </div>
 
@@ -149,7 +155,22 @@
 </div>
 
 
+<hr style="border: solid 2px"><p class="lead text-center fw-bold">{{ person.username }}님의 별점 분포</p><hr>
 
+
+<div class="row justify-content-center p-3">
+  <div style="width: 1000px; height:300px;" class="col-md-12 text-center" >
+    <canvas id="rankChart"></canvas>
+  </div>
+</div>
+
+{% if user == person %}
+<div class="text-center m-5">
+<a href="{% url 'movies:recommend' %}">
+<div class="badge text-wrap" style="width: 20rem; background-color: purple;">취향분석 영화 추천</div>
+</a>
+</div>
+{% endif %}
 
 <div class="page-wrapper" style="position:relative;">
   <!--page slider -->
@@ -163,7 +184,7 @@
         <div class="post">
           <a href="{% url 'movies:detail' movie.pk %}"><img src="{{ movie.poster_path }}" class="slider-image"></a>
           <div class="post-info text-center">
-            <i class="far fa-user" style="height:10%;">{{ movie.title }}</i>
+            <p>{{ movie.title }}</p>
           </div>
         </div>
         {% endfor %}
@@ -174,23 +195,10 @@
 
 
 
-<hr style="border: solid 2px"><p class="lead text-center fw-bold">{{ person.username }}님의 별점 분포</p><hr>
 
-<div class="row">
-  <div class="col-md-12 text-center" >
-    <div style="width: 1000px; height:300px;">
-      <canvas id="rankChart"></canvas>
-    </div>
-  </div>
-</div>
 
-{% if user == person %}
-<div class="text-center m-5">
-<a href="{% url 'movies:recommend' %}">
-<div class="badge text-wrap" style="width: 20rem; background-color: purple;">추천받으러 가기</div>
-</a>
-</div>
-{% endif %}
+
+
 
 
 
@@ -216,7 +224,49 @@ $('.post-wrapper').slick({
   prevArrow:$('.prev'),
 });
 
-
+const ctx = document.getElementById('rankChart').getContext('2d');
+console.log(ctx)
+  const rankChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['★','★★','★★★','★★★★','★★★★★'],
+          datasets: [{
+              label: 'reviews',
+              data: [{{ rank_cnt.one }}, {{ rank_cnt.two }}, {{ rank_cnt.three }}, {{ rank_cnt.four }}, {{ rank_cnt.five }}],
+              borderColor: [
+                  'purple',
+              ],
+              borderWidth: 1,
+          }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'Value'
+              },
+              min: 0,
+              ticks: {
+                // forces step size to be 50 units
+                stepSize: 1
+              }
+            }
+        },
+        legend: false, 
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+            backgroundColor: 'purple',
+        },
+        hover: { 
+            mode: 'nearest',
+            intersect: true
+        },
+    }
+  });
 
 
 const form = document.querySelector('#follow-form')
@@ -253,49 +303,7 @@ form.addEventListener('submit', (event) => {
 })
 
 
-const ctx = document.getElementById('rankChart').getContext('2d');
-console.log(ctx)
-  const rankChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: ['1','2','3','4','5'],
-          datasets: [{
-              label: 'stars',
-              data: [{{ rank_cnt.one }}, {{ rank_cnt.two }}, {{ rank_cnt.three }}, {{ rank_cnt.four }}, {{ rank_cnt.five }}],
-              borderColor: [
-                  'purple',
-              ],
-              borderWidth: 1,
-          }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-              title: {
-                display: true,
-                text: 'Value'
-              },
-              min: 0,
-              ticks: {
-                // forces step size to be 50 units
-                stepSize: 1
-              }
-            }
-        },
-        legend: false, 
-        tooltips: {
-            mode: 'index',
-            intersect: false,
-            backgroundColor: 'purple',
-        },
-        hover: { 
-            mode: 'nearest',
-            intersect: true
-        },
-    }
-  });
+
 
 
 
