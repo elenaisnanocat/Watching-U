@@ -9,6 +9,12 @@
   <title>Document</title>
 
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+
+.jejumyeongjo * { 
+ font-family: 'Jeju Myeongjo', serif;
+}
+
 .backgr {
   justify-content: center;
   align-items: center;
@@ -19,7 +25,7 @@
 
 {% comment %} class="d-flex justify-content-center" {% endcomment %}
 </head>
-<body class="bg-light bg-gradient">
+<body class="jejumyeongjo bg-light bg-gradient">
   {% include 'nav.html' %}
 
 <br><br>
@@ -38,9 +44,9 @@
         <h1 class="d-flex justify-content-center col-6 col align-self-center text-white" >{{ review.title }}</h1>
 
         
-          <div class="col-6"><br>
-          <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'accounts:profile' review.user %}"><작성자> {{ review.user }}</a>
-          <p class="d-flex justify-content-center"><a class="text-decoration-none text-white " href="{% url 'movies:detail' review.movie.pk %}"><영화제목> {{ review.movie.title }}</a></p>
+          <div class="col-6 text-center"><br>
+          <a class="d-flex justify-content-center text-decoration-none text-white" href="{% url 'accounts:profile' review.user %}">작성자 | {{ review.user }}</a>
+          <p class="d-flex justify-content-center"><a class="text-decoration-none text-white " href="{% url 'movies:detail' review.movie.pk %}">영화제목 | {{ review.movie.title }}</a></p>
           <p class="d-flex justify-content-center text-white" >
           
             {% if review.rank == 1 %}
@@ -59,11 +65,12 @@
         <p class="d-flex justify-content-center text-white col-11">{{ review.content }}</p>
         <hr class="text-white col-11">
         {% if review.user == request.user %}
-          <form class="d-flex justify-content-center" action="{% url 'community:delete' review.pk %}" method="POST">
+          <form  class="text-center" action="{% url 'community:delete' review.pk %}" method="POST">
           {% csrf_token %}
-          <button class="btn btn-link text-decoration-none text-white">[delete]</button>
-          </form></div>
-          <a class="d-flex justify-content-center text-decoration-none text-white p-3" href="{% url 'community:update' review.pk %}">[update]</a>
+          <button class="btn btn-link xt-decoration-none text-white">[delete]</button>
+          </form>
+          <a class="text-center text-decoration-none text-white" href="{% url 'community:update' review.pk %}">[update]</a>
+        </div>
 
           </form>
         {% endif %}</div>

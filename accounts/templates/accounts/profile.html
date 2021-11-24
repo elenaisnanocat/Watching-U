@@ -9,6 +9,12 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   <title>Document</title>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+
+.jejumyeongjo * { 
+ font-family: 'Jeju Myeongjo', serif;
+}
+
 /*post slider*/
 .post-slider{
   width:100%;
@@ -66,7 +72,7 @@
 
 
 </head>
-<body>
+<body class="jejumyeongjo">
   {% include 'nav.html' %}
 
   
@@ -105,7 +111,7 @@
   reviews {{ person.review_set.all|length }} | 
   followings <span id="followings">{{ person.followings.all|length }}</span> | 
   followers <span id="followers">{{ person.followers.all|length }}</span> <br>
-  영화 감상 <div class="badge text-wrap" style="width: 6rem; background-color: purple;">총 {{ user_runtime }}시간</div>
+  영화 감상 <div class="badge text-wrap" style="width: 9rem; background-color: purple;">총 {{ user_runtime }}시간</div>
   <hr>
 </div>
 
@@ -150,6 +156,25 @@
 
 
 
+<hr style="border: solid 2px"><p class="lead text-center fw-bold">{{ person.username }}님의 별점 분포</p><hr>
+
+<div class="row justify-content-center p-3">
+  <div style="width: 1000px; height:300px;" class="col-md-12 text-center" >
+    <canvas id="rankChart"></canvas>
+  </div>
+</div>
+
+{% if user == person %}
+<div class="text-center m-5">
+<a href="{% url 'movies:recommend' %}">
+<div class="badge text-wrap" style="width: 20rem; background-color: purple;">추천받으러 가기</div>
+</a>
+</div>
+{% endif %}
+
+
+
+
 
 <div class="page-wrapper" style="position:relative;">
   <!--page slider -->
@@ -163,7 +188,7 @@
         <div class="post">
           <a href="{% url 'movies:detail' movie.pk %}"><img src="{{ movie.poster_path }}" class="slider-image"></a>
           <div class="post-info text-center">
-            <i class="far fa-user" style="height:10%;">{{ movie.title }}</i>
+            <p style="height:10%;">{{ movie.title }}</p>
           </div>
         </div>
         {% endfor %}
@@ -172,25 +197,6 @@
   </div>
 </div>
 
-
-
-<hr style="border: solid 2px"><p class="lead text-center fw-bold">{{ person.username }}님의 별점 분포</p><hr>
-
-<div class="row">
-  <div class="col-md-12 text-center" >
-    <div style="width: 1000px; height:300px;">
-      <canvas id="rankChart"></canvas>
-    </div>
-  </div>
-</div>
-
-{% if user == person %}
-<div class="text-center m-5">
-<a href="{% url 'movies:recommend' %}">
-<div class="badge text-wrap" style="width: 20rem; background-color: purple;">추천받으러 가기</div>
-</a>
-</div>
-{% endif %}
 
 
 
@@ -215,43 +221,6 @@ $('.post-wrapper').slick({
   nextArrow:$('.next'),
   prevArrow:$('.prev'),
 });
-
-
-
-
-const form = document.querySelector('#follow-form')
-const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
-
-form.addEventListener('submit', (event) => {
-  event.preventDefault()
-  axios({
-    method: 'POST',
-    url: form.action,
-    headers: {
-      'X-CSRFToken': csrftoken
-    }
-  })
-  .then(res => {
-    const btn = form.querySelector('button')
-    if (res.data.is_follow) {
-      btn.innerText = '팔로우 취소'
-    } else {
-      btn.innerText = '팔로우'
-    }
-
-    const followers = document.querySelector('#followers')
-    const followings = document.querySelector('#followings')
-
-    followers.innerText = res.data.cnt_follower
-    followings.innerText = res.data.cnt_following
-
-  })
-  .catch(err => {
-    console.log(err)
-  })
-
-})
-
 
 const ctx = document.getElementById('rankChart').getContext('2d');
 console.log(ctx)
@@ -296,6 +265,43 @@ console.log(ctx)
         },
     }
   });
+
+
+const form = document.querySelector('#follow-form')
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault()
+  axios({
+    method: 'POST',
+    url: form.action,
+    headers: {
+      'X-CSRFToken': csrftoken
+    }
+  })
+  .then(res => {
+    const btn = form.querySelector('button')
+    if (res.data.is_follow) {
+      btn.innerText = '팔로우 취소'
+    } else {
+      btn.innerText = '팔로우'
+    }
+
+    const followers = document.querySelector('#followers')
+    const followings = document.querySelector('#followings')
+
+    followers.innerText = res.data.cnt_follower
+    followings.innerText = res.data.cnt_following
+
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
+})
+
+
+
 
 
 
