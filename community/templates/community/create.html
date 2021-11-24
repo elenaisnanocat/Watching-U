@@ -17,13 +17,27 @@
   {% block content %}
   <br><br><br><br>
 <div class="container d-flex justify-content-center">
-  <div>
+  
+<div>
     <form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-link text-decoration-none" >Create</button>
+    <input type="hidden" name="csrfmiddlewaretoken" value="K3Foz2ABBoWX3Uf1QhMULpo6V2YthLSnlyiAubDcxCCASqhyOYuSjhMqmCLPU7yN">
+      <h2><label class="d-flex justify-content-center" for="id_title">Review Title</label> </h2>
+      <input type="text" name="title" placeholder="영화 감상 제목을 작성해주세요~" required="" id="id_title">
+      <h3><label for="id_content">Review Content</label> </h3>
+      <textarea name="content" cols="40" rows="10" placeholder="영화를 감상한 소감을 나눠주세요~" required="" id="id_content"></textarea>
+      <h4><label for="id_rank">Rate</label> <input class="fs-4" type="number" name="rank" placeholder=" ★ ~ ★★★★★까지!!!" required="" id="id_rank"></h4>
+    <button class="btn btn-link text-decoration-none">Create</button>
     </form>
-  </div>
+</div>
+
+
+
+
+
+
+
+
+
 </div>
   {% endblock content %}
   
