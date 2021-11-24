@@ -1,13 +1,65 @@
-{% extends 'base.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <title>Document</title>
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+
+.jejumyeongjo * { 
+ font-family: 'Jeju Myeongjo', serif;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+</style>
 
 
-<br><br><br><br>
+</head>
+<body class="jejumyeongjo bg-light bg-gradient">
+  {% include 'nav.html' %}
+
+  
+  {% block content %}
+  <br><br><br><br>
 <div class="container d-flex justify-content-center">
+  
+<div>
+    <h5 style="color: grey">영화를 보며 느꼈던 모든 것을 자유롭게 공유해주세요</h5>
     <form action="" method="POST">
       {% csrf_token %}
-      {{ form.as_p }}
-      <button class="btn btn-link text-decoration-none ">Update</button>
+        <h3><label for="id_title">Review Title</label> </h3>
+        {{ form.title }}
+        <h3><label for="id_content">Review Content</label> </h3>
+        {{ form.content }}
+        <h4><label for="id_rank">Rate</label></h4>
+        {{ form.rank }}
+      <button class="btn btn-link text-decoration-none">Update</button>
+    
+    
     </form>
-</div><br><br><br><br>
-{% endblock  %}
+</div>
+
+
+
+</div>
+  {% endblock content %}
+  
+
+
+  <script>
+
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>

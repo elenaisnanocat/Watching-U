@@ -29,7 +29,7 @@ class ReviewForm(forms.ModelForm):
         label_suffix='',
         widget=forms.NumberInput(
             attrs={
-                'placeholder': '1~5',
+                'placeholder': '★ ~ ★★★★★',
             }
         )
     )
