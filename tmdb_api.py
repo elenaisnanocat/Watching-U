@@ -55,7 +55,9 @@ def get_detail_credits(movie_id):
 #     genre.save()
 
 
-# # 영화
+
+# 영화
+
 for i in range(1, 5):
     movie_url = f'https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}&language={language}&page={i}'
     movie_response = requests.get(movie_url).json().get('results')
