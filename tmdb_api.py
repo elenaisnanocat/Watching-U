@@ -12,12 +12,11 @@ from movies.models import Genre, Movie
 API_KEY = '5d898d026f62971327395d0f2504eef7'
 API_URL = 'https://api.themoviedb.org/3'
 
-language = 'ko-KR'
-region = 'KR'
+region='KR'
+language='ko'
 
 ## runtime
 def get_detail_credits(movie_id):
-
     detail_url = f'https://api.themoviedb.org/3/movie/{movie_id}?api_key={API_KEY}&language={language}'
     detail_response = requests.get(detail_url).json()
     
@@ -56,7 +55,9 @@ def get_detail_credits(movie_id):
 #     genre.save()
 
 
+
 # 영화
+
 for i in range(1, 5):
     movie_url = f'https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}&language={language}&page={i}'
     movie_response = requests.get(movie_url).json().get('results')
