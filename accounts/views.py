@@ -141,8 +141,8 @@ def get_rank_cnt(reviews):
             three += 1
         elif rank == 4:
             four += 1
-        else:
-            five
+        elif rank == 5:
+            five += 1
     rank_cnt = {
         'one': one,
         'two': two,
