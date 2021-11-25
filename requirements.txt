@@ -55,4 +55,3 @@ urllib3==1.26.7
 whitenoise==5.3.0
 wordcloud==1.8.1
 wsproto==1.0.0
-JPype1 @ file:///C:/Users/HOME/Desktop/%EA%B4%80%ED%86%B5/project-code/JPype1-1.1.2-cp38-cp38-win_amd64.whl
