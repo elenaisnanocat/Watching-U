@@ -178,3 +178,7 @@ STATICFILES_STORAGE = 'watchingu.storages.StaticStorage'
 
 MEDIAFILES_LOCATION = 'media'
 STATICFILES_LOCATION = 'static'
+
+AWS_ACCESS_KEY_ID = config('AAKI')
+AWS_SECRET_ACCESS_KEY = config('ASAK')
+AWS_STORAGE_BUCKET_NAME = config('BUCKET_NAME')
