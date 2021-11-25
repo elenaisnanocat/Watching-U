@@ -81,9 +81,9 @@
 
 ![image-20211125215657950](README.assets/image-20211125215657950.png)
 
-![image-20211125215704133](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215704133.png)
+![image-20211125215704133](README.assets/image-20211125215704133.png)
 
-![image-20211125215725788](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215725788.png)
+![image-20211125215725788](README.assets/image-20211125215725788.png)
 
 * 프로필 수정 (프로필 사진 및 상태메시지)
 
@@ -93,9 +93,9 @@
 
 * 평가한 영화의 총 runtime
 
-![image-20211125215757681](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215757681.png)
+![image-20211125215757681](README.assets/image-20211125215757681.png)
 
-![image-20211125215803778](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215803778.png)
+![image-20211125215803778](README.assets/image-20211125215803778.png)
 
 * 평가 리뷰글, 댓글, 좋아한 리뷰 목록
 
@@ -105,11 +105,11 @@
 
 > Recommend
 
-![image-20211125215837164](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215837164.png)
+![image-20211125215837164](README.assets/image-20211125215837164.png)
 
-![image-20211125215843565](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215843565.png)
+![image-20211125215843565](README.assets/image-20211125215843565.png)
 
-![image-20211125215848495](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215848495.png)
+![image-20211125215848495](README.assets/image-20211125215848495.png)
 
 1. 모든 User들이 보고싶어요를 많이 누른 영화 순
 
@@ -122,3 +122,9 @@
 3. User의 팔로우들이 가장 높은 별점을 준 영화 목록
 
 (팔로우를 했을 시)
+
+
+
+# 후기
+
+팀이 있었기에 기능 구현에 필요한 것들을 함께 학습하는 것에 대한 기대감이 있었습니다. 처음에 장고와 뷰를 하기로 하였으나 초반에 장고와 바닐라 자바스크립트로 바꿨고 프론트와 백엔드에 명확한 경계가 나뉘지 않는 이 선택이 오히려 학습하기에 개인적으로 잘 한 선택이라고 생각되어집니다. 가장 좋았던점은 개발 역량 향상이 있었음을 느낄  수 있었습니다. 프로젝트를 직접하고 홈페이지를 작성하면서 모르는 부분을 구글링해서 채우고 구현해보며 CSS와 HTML , JS 에 좀더 깊이 있게 알게 되었던 것 같습니다. 또한 이 과정에서 제가 얼마나 CSS와 JS를 얕게 알고 있었는지 체감 할 수있었으며 이러한 부분을 향후 더욱 개선하면 좋을 것이란 생각이 들었습니다. 역시 실습이 가장 실력이 느는데 빠른 길 인것 같고 학습한 것들을 곧 까먹을 것이란 걸 알기에 정리가 꼭 필요하다는 생각을 하였습니다.

@@ -41,4 +41,4 @@ class Movie(models.Model):
     objects = SearchManager()
 
     def __str__(self):
-        return self.title
+        return f'[{self.title}]'
