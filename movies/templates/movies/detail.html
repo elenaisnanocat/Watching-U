@@ -225,11 +225,14 @@ form.addEventListener('submit', (event) => {
 const iframe = document.querySelector('.video-trailer')
 const query = "{{ movie.title }}" + " movie trailer"
 // console.log(query)
-const API_KEY = 'AIzaSyCer-i6W_BIpmteNaMCjg_h38sXtoT4hXk'
+
+from decouple import config
+
+const YOUTUBE_KEY = config('YOUTUBE_KEY')
 const API_URL = 'https://www.googleapis.com/youtube/v3/search'
 
 const params = {
-  key: API_KEY,
+  key: YOUTUBE_KEY,
   part: 'snippet',
   type: 'video',
   q: query,
