@@ -227,9 +227,9 @@ console.log(ctx)
   const rankChart = new Chart(ctx, {
       type: 'bar',
       data: {
-          labels: ['1','2','3','4','5'],
+          labels: ['★','★★','★★★','★★★★','★★★★★'],
           datasets: [{
-              label: 'stars',
+              label: 'reviews',
               data: [{{ rank_cnt.one }}, {{ rank_cnt.two }}, {{ rank_cnt.three }}, {{ rank_cnt.four }}, {{ rank_cnt.five }}],
               borderColor: [
                   'purple',
