@@ -8,8 +8,8 @@ import requests
 import json
 
 from movies.models import Genre, Movie
-from decouple import config
-TMDB_KEY = config('TMDB_KEY')
+
+TMDB_KEY = '5d898d026f62971327395d0f2504eef7'
 API_URL = 'https://api.themoviedb.org/3'
 
 region='KR'
@@ -17,10 +17,10 @@ language='ko'
 
 ## runtime
 def get_detail_credits(movie_id):
-    detail_url = f'https://api.themoviedb.org/3/movie/{movie_id}?TMDB_KEY={TMDB_KEY}&language={language}'
+    detail_url = f'https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_KEY}&language={language}'
     detail_response = requests.get(detail_url).json()
     
-    credits_url = f'https://api.themoviedb.org/3/movie/{movie_id}/credits?TMDB_KEY={TMDB_KEY}&language={language}'
+    credits_url = f'https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={TMDB_KEY}&language={language}'
     credits_response = requests.get(credits_url).json()
 
 
@@ -42,8 +42,8 @@ def get_detail_credits(movie_id):
     }
     return context
 
-## 장르 
-# genre_url = f'https://api.themoviedb.org/3/genre/movie/list?TMDB_KEY={TMDB_KEY}&language={language}'
+# 장르 
+# genre_url = f'https://api.themoviedb.org/3/genre/movie/list?api_key={TMDB_KEY}&language={language}'
 # genre_response = requests.get(genre_url).json().get('genres')
 
 # print(genre_response)
@@ -59,7 +59,7 @@ def get_detail_credits(movie_id):
 # 영화
 
 for i in range(1, 5):
-    movie_url = f'https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}&language={language}&page={i}'
+    movie_url = f'https://api.themoviedb.org/3/movie/popular?api_key={TMDB_KEY}&language={language}&page={i}'
     movie_response = requests.get(movie_url).json().get('results')
 
     # print(movie_response)
