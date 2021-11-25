@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -171,3 +172,13 @@ SITE_ID = 1
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+DEFAULT_FILE_STORAGE = 'watchingu.storages.MediaStorage'
+STATICFILES_STORAGE = 'watchingu.storages.StaticStorage'
+
+MEDIAFILES_LOCATION = 'media'
+STATICFILES_LOCATION = 'static'
+
+AWS_ACCESS_KEY_ID = 'AKIA4AQIA6BHGLYAI7WM'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'watchingu'
