@@ -34,7 +34,7 @@ class Movie(models.Model):
     vote_average = models.FloatField()
     poster_path = models.CharField(max_length=200)
     backdrop_path = models.CharField(max_length=200, null=True)
-    actors = models.CharField(max_length=100, null=True)
+    actors = models.TextField(blank=True)
     director = models.CharField(max_length=50, null=True)
     runtime = models.IntegerField(null=True)
     wordcloud = models.ImageField(blank=True)
