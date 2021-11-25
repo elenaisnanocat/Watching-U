@@ -21,7 +21,7 @@
 
 #### :punch: ​계획 및 일정
 
-![image-20211125174819607](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125174819607.png)
+![image-20211125174819607](README.assets/image-20211125174819607.png)
 
 #### :punch: PJT 목표 및 실제 구현 개요
 
@@ -41,23 +41,23 @@
 
 #### :punch: ERD
 
-![image-20211125215043074](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215043074.png)
+![image-20211125215043074](README.assets/image-20211125215043074.png)
 
 #### :punch: ​프로젝트 기능 및 구현
 
 > Home
 
-![image-20211125215342978](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215342978.png)
+![image-20211125215342978](README.assets/image-20211125215342978.png)
 
-![image-20211125215351360](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215351360.png)
 
-![image-20211125215400303](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215400303.png)
 
-![image-20211125215405937](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215405937.png)
+![image-20211125215400303](README.assets/image-20211125215400303.png)
 
-![image-20211125215414776](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215414776.png)
+![image-20211125215405937](README.assets/image-20211125215405937.png)
 
-![image-20211125215421533](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215421533.png)
+![image-20211125215414776](README.assets/image-20211125215414776.png)
+
+![image-20211125215421533](README.assets/image-20211125215421533.png)
 
 * 영화 제목 및 감독 이름 검색 및 결과
 * 전체 영화 목록 (TMDB API)
@@ -68,9 +68,9 @@
 
 > Community
 
-![image-20211125215544190](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215544190.png)
+![image-20211125215544190](README.assets/image-20211125215544190.png)
 
-![image-20211125215549565](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215549565.png)
+![image-20211125215549565](README.assets/image-20211125215549565.png)
 
 * 전체 유저들의 영화 평가 리뷰 
 * 리뷰 좋아요 버튼
@@ -79,7 +79,7 @@
 
 > My page
 
-![image-20211125215657950](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215657950.png)
+![image-20211125215657950](README.assets/image-20211125215657950.png)
 
 ![image-20211125215704133](C:\Users\HOME\Desktop\관통\restart-project-code\README.assets\image-20211125215704133.png)
 
